@@ -1,0 +1,223 @@
+;;DATASET;CODE;;;;COUNTRY;GDP (BILLIONS);CODE
+;;Afghanistan;AFG;;;;Afghanistan;21.71;AFG
+Rótulos de Linha;;Algeria;DZA;;;;Albania;13.40;ALB
+Afghanistan;;Argentina;ARG;;;;Algeria;227.80;DZA
+Algeria;;Armenia;ARM;;;;American Samoa;0.75;ASM
+Argentina;;Australasia;AUT;;;;Andorra;4.80;AND
+Armenia;;Australia;AUS;;;;Angola;131.40;AGO
+Australasia;;Austria;AUT;;;;Anguilla;0.18;AIA
+Australia;;Azerbaijan;AZE;;;;Antigua and Barbuda;1.24;ATG
+Austria;;Bahrain;BHR;;;;Argentina;536.20;ARG
+Azerbaijan;;Barbados;BRB;;;;Armenia;10.88;ARM
+Bahrain;;Belarus;BLR;;;;Aruba;2.52;ABW
+Barbados;;Belgium;BEL;;;;Australia;1483.00;AUS
+Belarus;;Bermuda;BMU;;;;Austria;436.10;AUT
+Belgium;;Bohemia;CZE;;;;Azerbaijan;77.91;AZE
+Bermuda;;Botswana;BWA;;;;Bahamas, The;8.65;BHM
+Bohemia;;Brazil;BRA;;;;Bahrain;34.05;BHR
+Botswana;;Bulgaria;BGR;;;;Bangladesh;186.60;BGD
+Brazil;;Burkina Faso;BFA;;;;Barbados;4.28;BRB
+Bulgaria;;Burundi;BDI;;;;Belarus;75.25;BLR
+Burkina Faso;;Cameroon;CMR;;;;Belgium;527.80;BEL
+Burundi;;Canada;CAN;;;;Belize;1.67;BLZ
+Cameroon;;Chile;CHL;;;;Benin;9.24;BEN
+Canada;;Chinese Taipei;TWN;;;;Bermuda;5.20;BMU
+Chile;;Colombia;COL;;;;Bhutan;2.09;BTN
+Chinese Taipei;;Costa Rica;CRI;;;;Bolivia;34.08;BOL
+Colombia;;Croatia;HRV;;;;Bosnia and Herzegovina;19.55;BIH
+Costa Rica;;Cuba;CUB;;;;Botswana;16.30;BWA
+Croatia;;Cyprus;CYP;;;;Brazil;2244.00;BRA
+Cuba;;Czechia;CZE;;;;British Virgin Islands;1.10;VGB
+Cyprus;;Czechoslovakia;CZE;;;;Brunei;17.43;BRN
+Czechia;;Democratic People's Republic of Korea;PRK;;;;Bulgaria;55.08;BGR
+Czechoslovakia;;Denmark;DNK;;;;Burkina Faso;13.38;BFA
+Democratic People's Republic of Korea;;Djibouti;DJI;;;;Burma;65.29;MMR
+Denmark;;Dominican Republic;DOM;;;;Burundi;3.04;BDI
+Djibouti;;East Germany;DEU;;;;Cabo Verde;1.98;CPV
+Dominican Republic;;Ecuador;ECU;;;;Cambodia;16.90;KHM
+East Germany;;Egypt;EGY;;;;Cameroon;32.16;CMR
+Ecuador;;Eritrea;ERI;;;;Canada;1794.00;CAN
+Egypt;;Estonia;EST;;;;Cayman Islands;2.25;CYM
+Eritrea;;Ethiopia;ETH;;;;Central African Republic;1.73;CAF
+Estonia;;Fiji;FJI;;;;Chad;15.84;TCD
+Ethiopia;;Finland;FIN;;;;Chile;264.10;CHL
+Fiji;;France;FRA;;;;China;10360.00;CHN
+Finland;;Gabon;GAB;;;;Colombia;400.10;COL
+France;;Georgia;GEO;;;;Comoros;0.72;COM
+Gabon;;Germany;DEU;;;;Congo, Democratic Republic of the;32.67;COD
+Georgia;;Ghana;GHA;;;;Congo, Republic of the;14.11;COG
+Germany;;Great Britain;GRB;;;;Cook Islands;0.18;COK
+Ghana;;Greece;GRC;;;;Costa Rica;50.46;CRI
+Great Britain;;Grenada;GRD;;;;Cote d'Ivoire;33.96;CIV
+Greece;;Guatemala;GTM;;;;Croatia;57.18;HRV
+Grenada;;Guyana;GUY;;;;Cuba;77.15;CUB
+Guatemala;;Haiti;HTI;;;;Curacao;5.60;CUW
+Guyana;;Hong Kong, China;HKG;;;;Cyprus;21.34;CYP
+Haiti;;Hungary;HUN;;;;Czech Republic;205.60;CZE
+Hong Kong, China;;Iceland;ISL;;;;Denmark;347.20;DNK
+Hungary;;India;IND;;;;Djibouti;1.58;DJI
+Iceland;;Indonesia;IDN;;;;Dominica;0.51;DMA
+India;;Iraq;IRQ;;;;Dominican Republic;64.05;DOM
+Indonesia;;Ireland;IRL;;;;Ecuador;100.50;ECU
+Iraq;;Islamic Republic of Iran;IRN;;;;Egypt;284.90;EGY
+Ireland;;Israel;ISR;;;;El Salvador;25.14;SLV
+Islamic Republic of Iran;;Italy;ITA;;;;Equatorial Guinea;15.40;GNQ
+Israel;;Jamaica;JAM;;;;Eritrea;3.87;ERI
+Italy;;Japan;JPN;;;;Estonia;26.36;EST
+Jamaica;;Jordan;JOR;;;;Ethiopia;49.86;ETH
+Japan;;Kazakhstan;KAZ;;;;Falkland Islands (Islas Malvinas);0.16;FLK
+Jordan;;Kenya;KEN;;;;Faroe Islands;2.32;FRO
+Kazakhstan;;Kingdom of Saudi Arabia;SAU;;;;Fiji;4.17;FJI
+Kenya;;Kosovo;KSV;;;;Finland;276.30;FIN
+Kingdom of Saudi Arabia;;Kuwait;KWT;;;;France;2902.00;FRA
+Kosovo;;Kyrgyzstan;KGZ;;;;French Polynesia;7.15;PYF
+Kuwait;;Latvia;LVA;;;;Gabon;20.68;GAB
+Kyrgyzstan;;Lebanon;LBN;;;;Gambia, The;0.92;GMB
+Latvia;;Lithuania;LTU;;;;Georgia;16.13;GEO
+Lebanon;;Luxembourg;LUX;;;;Germany;3820.00;DEU
+Lithuania;;Malaysia;MYS;;;;Ghana;35.48;GHA
+Luxembourg;;Mauritius;MUS;;;;Gibraltar;1.85;GIB
+Malaysia;;Mexico;MEX;;;;Greece;246.40;GRC
+Mauritius;;Monaco;MCO;;;;Greenland;2.16;GRL
+Mexico;;Mongolia;MNG;;;;Grenada;0.84;GRD
+Monaco;;Montenegro;MNE;;;;Guam;4.60;GUM
+Mongolia;;Morocco;MAR;;;;Guatemala;58.30;GTM
+Montenegro;;Mozambique;MOZ;;;;Guernsey;2.74;GGY
+Morocco;;Namibia;NAM;;;;Guinea-Bissau;1.04;GNB
+Mozambique;;Netherlands;NLD;;;;Guinea;6.77;GIN
+Namibia;;Netherlands Antilles;NLD;;;;Guyana;3.14;GUY
+Netherlands;;New Zealand;NZL;;;;Haiti;8.92;HTI
+Netherlands Antilles;;Niger;NER;;;;Honduras;19.37;HND
+New Zealand;;Nigeria;NGA;;;;Hong Kong;292.70;HKG
+Niger;;North Macedonia;MKD;;;;Hungary;129.70;HUN
+Nigeria;;Norway;NOR;;;;Iceland;16.20;ISL
+North Macedonia;;Pakistan;PAK;;;;India;2048.00;IND
+Norway;;Panama;PAN;;;;Indonesia;856.10;IDN
+Pakistan;;Paraguay;PRY;;;;Iran;402.70;IRN
+Panama;;People's Republic of China;CHN;;;;Iraq;232.20;IRQ
+Paraguay;;Peru;PER;;;;Ireland;245.80;IRL
+People's Republic of China;;Philippines;PHL;;;;Isle of Man;4.08;IMN
+Peru;;Poland;POL;;;;Israel;305.00;ISR
+Philippines;;Portugal;PRT;;;;Italy;2129.00;ITA
+Poland;;Puerto Rico;PRI;;;;Jamaica;13.92;JAM
+Portugal;;Qatar;QAT;;;;Japan;4770.00;JPN
+Puerto Rico;;Republic of Korea;KOR;;;;Jersey;5.77;JEY
+Qatar;;Republic of Moldova;MDA;;;;Jordan;36.55;JOR
+Republic of Korea;;ROC;RUS;;;;Kazakhstan;225.60;KAZ
+Republic of Moldova;;Romania;ROU;;;;Kenya;62.72;KEN
+ROC;;Russian Federation;RUS;;;;Kiribati;0.16;KIR
+Romania;;Samoa;WSM;;;;Korea, North;28.00;PRK
+Russian Federation;;San Marino;SMR;;;;Korea, South;1410.00;KOR
+Samoa;;Senegal;SEN;;;;Kosovo;5.99;KSV
+San Marino;;Serbia;SRB;;;;Kuwait;179.30;KWT
+Senegal;;Serbia and Montenegro;SRB;;;;Kyrgyzstan;7.65;KGZ
+Serbia;;Singapore;SGP;;;;Laos;11.71;LAO
+Serbia and Montenegro;;Slovakia;SVK;;;;Latvia;32.82;LVA
+Singapore;;Slovenia;SVN;;;;Lebanon;47.50;LBN
+Slovakia;;South Africa;ZAF;;;;Lesotho;2.46;LSO
+Slovenia;;Soviet Union;RUS;;;;Liberia;2.07;LBR
+South Africa;;Spain;ESP;;;;Libya;49.34;LBY
+Soviet Union;;Sri Lanka;LKA;;;;Liechtenstein;5.11;LIE
+Spain;;Sudan;SDN;;;;Lithuania;48.72;LTU
+Sri Lanka;;Suriname;SUR;;;;Luxembourg;63.93;LUX
+Sudan;;Sweden;SWE;;;;Macau;51.68;MAC
+Suriname;;Switzerland;CHE;;;;Macedonia;10.92;MKD
+Sweden;;Syrian Arab Republic;SYR;;;;Madagascar;11.19;MDG
+Switzerland;;Tajikistan;TJK;;;;Malawi;4.41;MWI
+Syrian Arab Republic;;Thailand;THA;;;;Malaysia;336.90;MYS
+Tajikistan;;The Bahamas;BHM;;;;Maldives;2.41;MDV
+Thailand;;Togo;TGO;;;;Mali;12.04;MLI
+The Bahamas;;Tonga;TON;;;;Malta;10.57;MLT
+Togo;;Trinidad and Tobago;TTO;;;;Marshall Islands;0.18;MHL
+Tonga;;Tunisia;TUN;;;;Mauritania;4.29;MRT
+Trinidad and Tobago;;Turkmenistan;TKM;;;;Mauritius;12.72;MUS
+Tunisia;;Uganda;UGA;;;;Mexico;1296.00;MEX
+Turkmenistan;;Ukraine;UKR;;;;Micronesia, Federated States of;0.34;FSM
+Uganda;;United Arab Emirates;ARE;;;;Moldova;7.74;MDA
+Ukraine;;United Arab Republic;EGY;;;;Monaco;6.06;MCO
+United Arab Emirates;;United Republic of Tanzania;TZA;;;;Mongolia;11.73;MNG
+United Arab Republic;;United States;USA;;;;Montenegro;4.66;MNE
+United Republic of Tanzania;;United States Virgin Islands;VGB;;;;Morocco;112.60;MAR
+United States;;Uruguay;URY;;;;Mozambique;16.59;MOZ
+United States Virgin Islands;;Uzbekistan;UZB;;;;Namibia;13.11;NAM
+Uruguay;;Venezuela;VEN;;;;Nepal;19.64;NPL
+Uzbekistan;;Vietnam;VNM;;;;Netherlands;880.40;NLD
+Venezuela;;West Germany;DEU;;;;New Caledonia;11.10;NCL
+Vietnam;;Yugoslavia;SVN;;;;New Zealand;201.00;NZL
+West Germany;;Zambia;ZMB;;;;Nicaragua;11.85;NIC
+Yugoslavia;;Zimbabwe;ZWE;;;;Nigeria;594.30;NGA
+Zambia;;;;;;;Niger;8.29;NER
+Zimbabwe;;;;;;;Niue;0.01;NIU
+Total Geral;;;;;;;Northern Mariana Islands;1.23;MNP
+;;;;;;;Norway;511.60;NOR
+;;;;;;;Oman;80.54;OMN
+;;;;;;;Pakistan;237.50;PAK
+;;;;;;;Palau;0.65;PLW
+;;;;;;;Panama;44.69;PAN
+;;;;;;;Papua New Guinea;16.10;PNG
+;;;;;;;Paraguay;31.30;PRY
+;;;;;;;Peru;208.20;PER
+;;;;;;;Philippines;284.60;PHL
+;;;;;;;Poland;552.20;POL
+;;;;;;;Portugal;228.20;PRT
+;;;;;;;Puerto Rico;93.52;PRI
+;;;;;;;Qatar;212.00;QAT
+;;;;;;;Romania;199.00;ROU
+;;;;;;;Russia;2057.00;RUS
+;;;;;;;Rwanda;8.00;RWA
+;;;;;;;Saint Kitts and Nevis;0.81;KNA
+;;;;;;;Saint Lucia;1.35;LCA
+;;;;;;;Saint Martin;0.56;MAF
+;;;;;;;Saint Pierre and Miquelon;0.22;SPM
+;;;;;;;Saint Vincent and the Grenadines;0.75;VCT
+;;;;;;;Samoa;0.83;WSM
+;;;;;;;San Marino;1.86;SMR
+;;;;;;;Sao Tome and Principe;0.36;STP
+;;;;;;;Saudi Arabia;777.90;SAU
+;;;;;;;Senegal;15.88;SEN
+;;;;;;;Serbia;42.65;SRB
+;;;;;;;Seychelles;1.47;SYC
+;;;;;;;Sierra Leone;5.41;SLE
+;;;;;;;Singapore;307.90;SGP
+;;;;;;;Sint Maarten;304.10;SXM
+;;;;;;;Slovakia;99.75;SVK
+;;;;;;;Slovenia;49.93;SVN
+;;;;;;;Solomon Islands;1.16;SLB
+;;;;;;;Somalia;2.37;SOM
+;;;;;;;South Africa;341.20;ZAF
+;;;;;;;South Sudan;11.89;SSD
+;;;;;;;Spain;1400.00;ESP
+;;;;;;;Sri Lanka;71.57;LKA
+;;;;;;;Sudan;70.03;SDN
+;;;;;;;Suriname;5.27;SUR
+;;;;;;;Swaziland;3.84;SWZ
+;;;;;;;Sweden;559.10;SWE
+;;;;;;;Switzerland;679.00;CHE
+;;;;;;;Syria;64.70;SYR
+;;;;;;;Taiwan;529.50;TWN
+;;;;;;;Tajikistan;9.16;TJK
+;;;;;;;Tanzania;36.62;TZA
+;;;;;;;Thailand;373.80;THA
+;;;;;;;Timor-Leste;4.51;TLS
+;;;;;;;Togo;4.84;TGO
+;;;;;;;Tonga;0.49;TON
+;;;;;;;Trinidad and Tobago;29.63;TTO
+;;;;;;;Tunisia;49.12;TUN
+;;;;;;;Turkey;813.30;TUR
+;;;;;;;Turkmenistan;43.50;TKM
+;;;;;;;Tuvalu;0.04;TUV
+;;;;;;;Uganda;26.09;UGA
+;;;;;;;Ukraine;134.90;UKR
+;;;;;;;United Arab Emirates;416.40;ARE
+;;;;;;;United Kingdom;2848.00;GBR
+;;;;;;;United States;17420.00;USA
+;;;;;;;Uruguay;55.60;URY
+;;;;;;;Uzbekistan;63.08;UZB
+;;;;;;;Vanuatu;0.82;VUT
+;;;;;;;Venezuela;209.20;VEN
+;;;;;;;Vietnam;187.80;VNM
+;;;;;;;Virgin Islands;5.08;VGB
+;;;;;;;West Bank;6.64;WBG
+;;;;;;;Yemen;45.45;YEM
+;;;;;;;Zambia;25.61;ZMB
+;;;;;;;Zimbabwe;13.74;ZWE

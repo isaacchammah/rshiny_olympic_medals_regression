@@ -1,0 +1,729 @@
+edition,2020 Summer Olympics,,,,,
+,,,,,,
+Contagem de medal,R�tulos de Coluna,,,,,
+R�tulos de Linha,Bronze,Gold,na,Silver,Total Geral,
+MON,,,6,,6,
+MAR,,1,49,,50,
+AFG,,,5,,5,
+ALB,,,10,,10,
+ALG,,,45,,45,
+AND,,,3,,3,
+ANG,,,20,,20,
+ANT,,,6,,6,
+ARG,25,,163,18,206,
+ARM,2,,15,2,19,
+ARU,,,4,,4,
+ASA,,,6,,6,
+AUS,66,36,481,28,611,
+AUT,5,1,93,1,100,
+AZE,4,,48,3,55,
+BAH,,2,18,,20,
+BAN,,,8,,8,
+BAR,,,9,,9,
+BDI,,,7,,7,
+BEL,6,20,147,1,174,
+BEN,,,7,,7,
+BER,,1,1,,2,
+BHU,,,4,,4,
+BIH,,,8,,8,
+BIZ,,,4,,4,
+BLR,3,1,128,6,138,
+BOL,,,5,,5,
+BOT,5,,11,,16,
+BRA,9,29,350,17,405,
+BRN,,,32,1,33,
+BRU,,,2,,2,
+BUL,2,7,44,1,54,
+BUR,1,,7,,8,
+CAF,,,2,,2,
+CAM,,,3,,3,
+CAN,38,36,415,11,500,
+CAY,,,8,,8,
+CGO,,,3,,3,
+CHA,,,3,,3,
+CHI,,,62,,62,
+CHN,33,58,424,49,564,
+CIV,1,,31,,32,
+CMR,,,12,,12,
+COD,,,7,,7,
+COK,,,9,,9,
+COL,1,,71,4,76,
+COM,,,3,,3,
+CPV,,,6,,6,
+CRC,,,17,,17,
+CRO,2,5,63,4,74,
+CUB,5,8,65,3,81,
+CYP,,,22,,22,
+CZE,4,5,134,4,147,
+DEN,5,4,102,23,134,
+DJI,,,5,,5,
+DMA,,,2,,2,
+DOM,25,,36,7,68,
+ECU,,2,49,1,52,
+EGY,4,1,185,1,191,
+EOR,,,35,,35,
+ERI,,,14,,14,
+ESA,,,7,,7,
+ESP,22,4,346,44,416,
+EST,1,4,37,,42,
+ETH,2,1,33,1,37,
+FIJ,13,13,6,,32,
+FIN,2,,47,,49,
+FRA,31,65,386,42,524,
+FSM,,,3,,3,
+GAB,,,5,,5,
+GAM,,,5,,5,
+GBR,57,40,396,35,528,
+GBS,,,4,,4,
+GEO,1,2,26,5,34,
+GEQ,,,3,,3,
+GER,34,20,497,25,576,
+GHA,1,,15,,16,
+GRE,1,2,83,13,99,
+GRN,1,,5,,6,
+GUA,,,24,,24,
+GUI,,,5,,5,
+GUM,,,5,,5,
+GUY,,,7,,7,
+HAI,,,6,,6,
+HKG,5,1,56,2,64,
+HON,,,28,,28,
+HUN,35,9,185,7,236,
+INA,3,2,29,1,35,
+IND,21,1,124,2,148,
+IRI,2,3,69,2,76,
+IRL,5,3,133,,141,
+IRQ,,,3,,3,
+ISL,,,5,,5,
+ISR,12,2,113,,127,
+ISV,,,5,,5,
+ITA,38,21,433,17,509,
+IVB,,,3,,3,
+JAM,11,9,64,1,85,
+JOR,1,,13,1,15,
+JPN,22,68,643,41,774,
+KAZ,8,,108,,116,
+KEN,2,4,78,4,88,
+KGZ,1,,14,2,17,
+KIR,,,3,,3,
+KOR,17,14,293,7,331,
+KOS,,2,9,,11,
+KSA,,,32,1,33,
+KUW,1,,9,,10,
+LAO,,,4,,4,
+LAT,1,4,33,,38,
+LBA,,,4,,4,
+LBN,,,6,,6,
+LBR,,,4,,4,
+LCA,,,5,,5,
+LES,,,2,,2,
+LIE,,,8,,8,
+LTU,,,58,1,59,
+LUX,,,14,,14,
+MAD,,,6,,6,
+MAS,2,,42,1,45,
+MAW,,,5,,5,
+MDA,1,,25,,26,
+MDV,,,4,,4,
+MEX,27,,167,,194,
+MGL,3,,57,1,61,
+MHL,,,2,,2,
+MKD,,,7,1,8,
+MLI,,,4,,4,
+MLT,,,8,,8,
+MNE,,,22,,22,
+MOZ,,,10,,10,
+MRI,,,8,,8,
+MTN,,,2,,2,
+MYA,,,2,,2,
+NAM,,,10,1,11,
+NCA,,,8,,8,
+NED,17,33,308,22,380,
+NEP,,,5,,5,
+NGR,1,,69,1,71,
+NIG,,,7,,7,
+NOR,16,5,89,2,112,
+NRU,,,2,,2,
+NZL,8,29,207,28,272,
+OMA,,,5,,5,
+PAK,,,10,,10,
+PAN,,,11,,11,
+PAR,,,9,,9,
+PER,,,41,,41,
+PHI,1,1,23,2,27,
+PLE,,,5,,5,
+PLW,,,3,,3,
+PNG,,,8,,8,
+POL,8,14,238,14,274,
+POR,2,1,107,1,111,
+PUR,,1,38,,39,
+QAT,2,2,13,,17,
+ROC,27,41,397,80,545,
+ROU,,2,109,7,118,
+RSA,,1,206,2,209,
+RWA,,,5,,5,
+SAM,,,13,,13,
+SEN,,,9,,9,
+SEY,,,6,,6,
+SGP,,,30,,30,
+SKN,,,2,,2,
+SLE,,,4,,4,
+SLO,1,3,59,1,64,
+SMR,2,,4,2,8,
+SOL,,,3,,3,
+SOM,,,2,,2,
+SRB,19,15,75,1,110,
+SRI,,,12,,12,
+SSD,,,2,,2,
+STP,,,5,,5,
+SUD,,,5,,5,
+SUI,7,3,171,5,186,
+SUR,,,4,,4,
+SVK,4,1,48,2,55,
+SWE,,6,135,28,169,
+SWZ,,,4,,4,
+SYR,1,,5,,6,
+TAN,,,3,,3,
+TGA,,,6,,6,
+THA,1,1,46,,48,
+TJK,,,10,,10,
+TKM,,,9,1,10,
+TLS,,,3,,3,
+TOG,,,4,,4,
+TPE,7,3,97,6,113,
+TTO,,,42,,42,
+TUN,,1,71,1,73,
+TUR,9,2,125,2,138,
+TUV,,,2,,2,
+UAE,,,5,,5,
+UGA,1,2,24,1,28,
+UKR,21,1,188,7,217,
+URU,,,11,,11,
+USA,75,113,541,109,838,
+UZB,2,3,79,,84,
+VAN,,,3,,3,
+VEN,,1,43,3,47,
+VIE,,,23,,23,
+VIN,,,3,,3,
+YEM,,,6,,6,
+ZAM,,,31,,31,
+ZIM,,,5,,5,
+Total Geral,862,796,12357,771,14786,
+,,,,,,
+R�tulos de Linha,Bronze,Gold,na,Silver,Total Geral,zero
+MON,,,6,,6,VERDADEIRO
+MAR,,1,49,,50,FALSO
+AFG,,,5,,5,VERDADEIRO
+ALB,,,10,,10,VERDADEIRO
+ALG,,,45,,45,VERDADEIRO
+AND,,,3,,3,VERDADEIRO
+ANG,,,20,,20,VERDADEIRO
+ANT,,,6,,6,VERDADEIRO
+ARG,25,,163,18,206,FALSO
+ARM,2,,15,2,19,FALSO
+ARU,,,4,,4,VERDADEIRO
+ASA,,,6,,6,VERDADEIRO
+AUS,66,36,481,28,611,FALSO
+AUT,5,1,93,1,100,FALSO
+AZE,4,,48,3,55,FALSO
+BAH,,2,18,,20,FALSO
+BAN,,,8,,8,VERDADEIRO
+BAR,,,9,,9,VERDADEIRO
+BDI,,,7,,7,VERDADEIRO
+BEL,6,20,147,1,174,FALSO
+BEN,,,7,,7,VERDADEIRO
+BER,,1,1,,2,FALSO
+BHU,,,4,,4,VERDADEIRO
+BIH,,,8,,8,VERDADEIRO
+BIZ,,,4,,4,VERDADEIRO
+BLR,3,1,128,6,138,FALSO
+BOL,,,5,,5,VERDADEIRO
+BOT,5,,11,,16,FALSO
+BRA,9,29,350,17,405,FALSO
+BRN,,,32,1,33,FALSO
+BRU,,,2,,2,VERDADEIRO
+BUL,2,7,44,1,54,FALSO
+BUR,1,,7,,8,FALSO
+CAF,,,2,,2,VERDADEIRO
+CAM,,,3,,3,VERDADEIRO
+CAN,38,36,415,11,500,FALSO
+CAY,,,8,,8,VERDADEIRO
+CGO,,,3,,3,VERDADEIRO
+CHA,,,3,,3,VERDADEIRO
+CHI,,,62,,62,VERDADEIRO
+CHN,33,58,424,49,564,FALSO
+CIV,1,,31,,32,FALSO
+CMR,,,12,,12,VERDADEIRO
+COD,,,7,,7,VERDADEIRO
+COK,,,9,,9,VERDADEIRO
+COL,1,,71,4,76,FALSO
+COM,,,3,,3,VERDADEIRO
+CPV,,,6,,6,VERDADEIRO
+CRC,,,17,,17,VERDADEIRO
+CRO,2,5,63,4,74,FALSO
+CUB,5,8,65,3,81,FALSO
+CYP,,,22,,22,VERDADEIRO
+CZE,4,5,134,4,147,FALSO
+DEN,5,4,102,23,134,FALSO
+DJI,,,5,,5,VERDADEIRO
+DMA,,,2,,2,VERDADEIRO
+DOM,25,,36,7,68,FALSO
+ECU,,2,49,1,52,FALSO
+EGY,4,1,185,1,191,FALSO
+EOR,,,35,,35,VERDADEIRO
+ERI,,,14,,14,VERDADEIRO
+ESA,,,7,,7,VERDADEIRO
+ESP,22,4,346,44,416,FALSO
+EST,1,4,37,,42,FALSO
+ETH,2,1,33,1,37,FALSO
+FIJ,13,13,6,,32,FALSO
+FIN,2,,47,,49,FALSO
+FRA,31,65,386,42,524,FALSO
+FSM,,,3,,3,VERDADEIRO
+GAB,,,5,,5,VERDADEIRO
+GAM,,,5,,5,VERDADEIRO
+GBR,57,40,396,35,528,FALSO
+GBS,,,4,,4,VERDADEIRO
+GEO,1,2,26,5,34,FALSO
+GEQ,,,3,,3,VERDADEIRO
+GER,34,20,497,25,576,FALSO
+GHA,1,,15,,16,FALSO
+GRE,1,2,83,13,99,FALSO
+GRN,1,,5,,6,FALSO
+GUA,,,24,,24,VERDADEIRO
+GUI,,,5,,5,VERDADEIRO
+GUM,,,5,,5,VERDADEIRO
+GUY,,,7,,7,VERDADEIRO
+HAI,,,6,,6,VERDADEIRO
+HKG,5,1,56,2,64,FALSO
+HON,,,28,,28,VERDADEIRO
+HUN,35,9,185,7,236,FALSO
+INA,3,2,29,1,35,FALSO
+IND,21,1,124,2,148,FALSO
+IRI,2,3,69,2,76,FALSO
+IRL,5,3,133,,141,FALSO
+IRQ,,,3,,3,VERDADEIRO
+ISL,,,5,,5,VERDADEIRO
+ISR,12,2,113,,127,FALSO
+ISV,,,5,,5,VERDADEIRO
+ITA,38,21,433,17,509,FALSO
+IVB,,,3,,3,VERDADEIRO
+JAM,11,9,64,1,85,FALSO
+JOR,1,,13,1,15,FALSO
+JPN,22,68,643,41,774,FALSO
+KAZ,8,,108,,116,FALSO
+KEN,2,4,78,4,88,FALSO
+KGZ,1,,14,2,17,FALSO
+KIR,,,3,,3,VERDADEIRO
+KOR,17,14,293,7,331,FALSO
+KOS,,2,9,,11,FALSO
+KSA,,,32,1,33,FALSO
+KUW,1,,9,,10,FALSO
+LAO,,,4,,4,VERDADEIRO
+LAT,1,4,33,,38,FALSO
+LBA,,,4,,4,VERDADEIRO
+LBN,,,6,,6,VERDADEIRO
+LBR,,,4,,4,VERDADEIRO
+LCA,,,5,,5,VERDADEIRO
+LES,,,2,,2,VERDADEIRO
+LIE,,,8,,8,VERDADEIRO
+LTU,,,58,1,59,FALSO
+LUX,,,14,,14,VERDADEIRO
+MAD,,,6,,6,VERDADEIRO
+MAS,2,,42,1,45,FALSO
+MAW,,,5,,5,VERDADEIRO
+MDA,1,,25,,26,FALSO
+MDV,,,4,,4,VERDADEIRO
+MEX,27,,167,,194,FALSO
+MGL,3,,57,1,61,FALSO
+MHL,,,2,,2,VERDADEIRO
+MKD,,,7,1,8,FALSO
+MLI,,,4,,4,VERDADEIRO
+MLT,,,8,,8,VERDADEIRO
+MNE,,,22,,22,VERDADEIRO
+MOZ,,,10,,10,VERDADEIRO
+MRI,,,8,,8,VERDADEIRO
+MTN,,,2,,2,VERDADEIRO
+MYA,,,2,,2,VERDADEIRO
+NAM,,,10,1,11,FALSO
+NCA,,,8,,8,VERDADEIRO
+NED,17,33,308,22,380,FALSO
+NEP,,,5,,5,VERDADEIRO
+NGR,1,,69,1,71,FALSO
+NIG,,,7,,7,VERDADEIRO
+NOR,16,5,89,2,112,FALSO
+NRU,,,2,,2,VERDADEIRO
+NZL,8,29,207,28,272,FALSO
+OMA,,,5,,5,VERDADEIRO
+PAK,,,10,,10,VERDADEIRO
+PAN,,,11,,11,VERDADEIRO
+PAR,,,9,,9,VERDADEIRO
+PER,,,41,,41,VERDADEIRO
+PHI,1,1,23,2,27,FALSO
+PLE,,,5,,5,VERDADEIRO
+PLW,,,3,,3,VERDADEIRO
+PNG,,,8,,8,VERDADEIRO
+POL,8,14,238,14,274,FALSO
+POR,2,1,107,1,111,FALSO
+PUR,,1,38,,39,FALSO
+QAT,2,2,13,,17,FALSO
+ROC,27,41,397,80,545,FALSO
+ROU,,2,109,7,118,FALSO
+RSA,,1,206,2,209,FALSO
+RWA,,,5,,5,VERDADEIRO
+SAM,,,13,,13,VERDADEIRO
+SEN,,,9,,9,VERDADEIRO
+SEY,,,6,,6,VERDADEIRO
+SGP,,,30,,30,VERDADEIRO
+SKN,,,2,,2,VERDADEIRO
+SLE,,,4,,4,VERDADEIRO
+SLO,1,3,59,1,64,FALSO
+SMR,2,,4,2,8,FALSO
+SOL,,,3,,3,VERDADEIRO
+SOM,,,2,,2,VERDADEIRO
+SRB,19,15,75,1,110,FALSO
+SRI,,,12,,12,VERDADEIRO
+SSD,,,2,,2,VERDADEIRO
+STP,,,5,,5,VERDADEIRO
+SUD,,,5,,5,VERDADEIRO
+SUI,7,3,171,5,186,FALSO
+SUR,,,4,,4,VERDADEIRO
+SVK,4,1,48,2,55,FALSO
+SWE,,6,135,28,169,FALSO
+SWZ,,,4,,4,VERDADEIRO
+SYR,1,,5,,6,FALSO
+TAN,,,3,,3,VERDADEIRO
+TGA,,,6,,6,VERDADEIRO
+THA,1,1,46,,48,FALSO
+TJK,,,10,,10,VERDADEIRO
+TKM,,,9,1,10,FALSO
+TLS,,,3,,3,VERDADEIRO
+TOG,,,4,,4,VERDADEIRO
+TPE,7,3,97,6,113,FALSO
+TTO,,,42,,42,VERDADEIRO
+TUN,,1,71,1,73,FALSO
+TUR,9,2,125,2,138,FALSO
+TUV,,,2,,2,VERDADEIRO
+UAE,,,5,,5,VERDADEIRO
+UGA,1,2,24,1,28,FALSO
+UKR,21,1,188,7,217,FALSO
+URU,,,11,,11,VERDADEIRO
+USA,75,113,541,109,838,FALSO
+UZB,2,3,79,,84,FALSO
+VAN,,,3,,3,VERDADEIRO
+VEN,,1,43,3,47,FALSO
+VIE,,,23,,23,VERDADEIRO
+VIN,,,3,,3,VERDADEIRO
+YEM,,,6,,6,VERDADEIRO
+ZAM,,,31,,31,VERDADEIRO
+ZIM,,,5,,5,VERDADEIRO
+mudar,mudar,mudar,,,,
+MON,Monaco,Monaco,,,,
+AFG,Afghanistan,Afghanistan,VERDADEIRO,,,
+ALB,Albania,Albania,,,,
+ALG,Algeria,Algeria,,,,
+AND,Andorra,Andorra,,,,
+ANG,Angola,Angola,,,,
+ANT,Antigua and Barbuda,Antigua and Barbuda,,,,
+ARU,Aruba,#N/D,,,,
+ASA,American Samoa,#N/D,ok,,,
+BAN,Bangladesh,Bangladesh,,,,
+BAR,Barbados,Barbados,,,,
+BDI,Burundi,Burundi,,,,
+BEN,Benin,Benin,,,,
+BHU,Bhutan,Bhutan,,,,
+BIH,Bosnia and Herzegovina,Bosnia and Herzegovina,,,,
+BIZ,Belize,Belize,,,,
+BOL,Bolivia,Bolivia,,,,
+BRU,Brunei Darussalam,#N/D,ok,,,
+CAF,Central African Republic,Central African Republic,,,,
+CAM,Cambodia,Cambodia,,,,
+CAY,Cayman Islands,#N/D,,,,
+CGO,Congo,#N/D,ok,,,
+CHA,Chad,Chad,,,,
+CHI,Chile,Chile,,,,
+CMR,Cameroon,Cameroon,,,,
+COD,Democratic Republic of the Congo,Democratic Republic of the Congo,,,,
+COK,Cook Islands,#N/D,,,,
+COM,Comoros,Comoros,,,,
+CPV,Cape Verde,Cape Verde,,,,
+CRC,Costa Rica,Costa Rica,,,,
+CYP,Cyprus,Cyprus,,,,
+DJI,Djibouti,Djibouti,,,,
+DMA,Dominica,Dominica,,,,
+EOR,Refugee Olympic Team,#N/D,,,,
+ERI,Eritrea,Eritrea,,,,
+ESA,El Salvador,El Salvador,,,,
+FSM,Federated States of Micronesia,Federated States of Micronesia,,,,
+GAB,Gabon,Gabon,,,,
+GAM,The Gambia,The Gambia,,,,
+GBS,Guinea Bissau,#N/D,ok,,,
+GEQ,Equatorial Guinea,Equatorial Guinea,,,,
+GUA,Guatemala,Guatemala,,,,
+GUI,Guinea,Guinea,,,,
+GUM,Guam,#N/D,,,,
+GUY,Guyana,Guyana,,,,
+HAI,Haiti,Haiti,,,,
+HON,Honduras,Honduras,,,,
+IRQ,Iraq,Iraq,,,,
+ISL,Iceland,Iceland,,,,
+ISV,United States Virgin Islands,#N/D,,,,
+IVB,British Virgin Islands,#N/D,,,,
+KIR,Kiribati,Kiribati,,,,
+LAO,Lao People's Democratic Republic,#N/D,ok,,,
+LBA,Libya,Libya,,,,
+LBN,Lebanon,Lebanon,,,,
+LBR,Liberia,Liberia,,,,
+LCA,Saint Lucia,Saint Lucia,,,,
+LES,Lesotho,Lesotho,,,,
+LIE,Liechtenstein,Liechtenstein,,,,
+LUX,Luxembourg,Luxembourg,,,,
+MAD,Madagascar,Madagascar,,,,
+MAW,Malawi,Malawi,,,,
+MDV,Maldives,Maldives,,,,
+MHL,Marshall Islands,Marshall Islands,,,,
+MLI,Mali,Mali,,,,
+MLT,Malta,Malta,,,,
+MNE,Montenegro,Montenegro,,,,
+MOZ,Mozambique,Mozambique,,,,
+MRI,Mauritius,Mauritius,,,,
+MTN,Mauritania,Mauritania,,,,
+MYA,Myanmar,Myanmar,,,,
+NCA,Nicaragua,Nicaragua,,,,
+NEP,Nepal,Nepal,,,,
+NIG,Niger,Niger,,,,
+NRU,Nauru,Nauru,,,,
+OMA,Oman,Oman,,,,
+PAK,Pakistan,Pakistan,,,,
+PAN,Panama,Panama,,,,
+PAR,Paraguay,Paraguay,,,,
+PER,Peru,Peru,,,,
+PLE,Palestine,#N/D,ok,,,
+PLW,Palau,Palau,,,,
+PNG,Papua New Guinea,Papua New Guinea,,,,
+RWA,Rwanda,Rwanda,,,,
+SAM,Samoa,Samoa,,,,
+SEN,Senegal,Senegal,,,,
+SEY,Seychelles,Seychelles,,,,
+SGP,Singapore,Singapore,,,,
+SKN,Saint Kitts and Nevis,Saint Kitts and Nevis,,,,
+SLE,Sierra Leone,Sierra Leone,,,,
+SOL,Solomon Islands,Solomon Islands,,,,
+SOM,Somalia,Somalia,,,,
+SRI,Sri Lanka,Sri Lanka,,,,
+SSD,South Sudan,South Sudan,,,,
+STP,São Tomé and Príncipe,#N/D,,,,
+SUD,Sudan,Sudan,,,,
+SUR,Suriname,Suriname,,,,
+SWZ,Eswatini,Eswatini,,,,
+TAN,United Republic of Tanzania,#N/D,ok,,,
+TGA,Tonga,Tonga,,,,
+TJK,Tajikistan,Tajikistan,,,,
+TLS,Timor-Leste,#N/D,ok,,,
+TOG,Togo,Togo,,,,
+TTO,Trinidad and Tobago,Trinidad and Tobago,,,,
+TUV,Tuvalu,Tuvalu,,,,
+UAE,United Arab Emirates,United Arab Emirates,,,,
+URU,Uruguay,Uruguay,,,,
+VAN,Vanuatu,Vanuatu,,,,
+VIE,Vietnam,Vietnam,,,,
+VIN,Saint Vincent and the Grenadines,Saint Vincent and the Grenadines,,,,
+YEM,Yemen,Yemen,,,,
+ZAM,Zambia,Zambia,,,,
+ZIM,Zimbabwe,Zimbabwe,,,,
+,,,,,,
+,Afghanistan,Afghanistan,,,,
+, Albania ,Albania,,,,
+, Algeria ,Algeria,,,,
+, Andorra ,Andorra,,,,
+, Angola ,Angola,,,,
+, Antigua and Barbuda ,Antigua and Barbuda,,,,
+, Argentina ,Argentina,,,,
+, Armenia ,Armenia,,,,
+, Australia ,Australia,,,,
+, Austria ,Austria,,,,
+, Azerbaijan ,Azerbaijan,,,,
+, The Bahamas ,The Bahamas,,,,
+, Bahrain ,Bahrain,,,,
+, Bangladesh ,Bangladesh,,,,
+, Barbados ,Barbados,,,,
+, Belarus ,Belarus,,,,
+, Belgium ,Belgium,,,,
+, Belize ,Belize,,,,
+, Benin ,Benin,,,,
+, Bhutan ,Bhutan,,,,
+, Bolivia ,Bolivia,,,,
+, Bosnia and Herzegovina ,Bosnia and Herzegovina,,,,
+, Botswana ,Botswana,,,,
+, Brazil ,Brazil,,,,
+, Brunei ,Brunei,,,,
+, Bulgaria ,Bulgaria,,,,
+, Burkina Faso ,Burkina Faso,,,,
+, Burundi ,Burundi,,,,
+, Côte d'Ivoire ,Côte d'Ivoire,,,,
+, Cape Verde ,Cape Verde,,,,
+, Cambodia ,Cambodia,,,,
+, Cameroon ,Cameroon,,,,
+, Canada ,Canada,,,,
+, Central African Republic ,Central African Republic,,,,
+, Chad ,Chad,,,,
+, Chile ,Chile,,,,
+, People's Republic of China ,People's Republic of China,,,,
+, Colombia ,Colombia,,,,
+, Comoros ,Comoros,,,,
+, Republic of the Congo ,Republic of the Congo,,,,
+, Costa Rica ,Costa Rica,,,,
+, Croatia ,Croatia,,,,
+, Cuba ,Cuba,,,,
+, Cyprus ,Cyprus,,,,
+, Czechia ,Czechia,,,,
+, Democratic Republic of the Congo ,Democratic Republic of the Congo,,,,
+, Denmark ,Denmark,,,,
+, Djibouti ,Djibouti,,,,
+, Dominica ,Dominica,,,,
+, Dominican Republic ,Dominican Republic,,,,
+, Ecuador ,Ecuador,,,,
+, Egypt ,Egypt,,,,
+, El Salvador ,El Salvador,,,,
+, Equatorial Guinea ,Equatorial Guinea,,,,
+, Eritrea ,Eritrea,,,,
+, Estonia ,Estonia,,,,
+, Eswatini ,Eswatini,,,,
+, Ethiopia ,Ethiopia,,,,
+, Fiji ,Fiji,,,,
+, Finland ,Finland,,,,
+, France ,France,,,,
+, Gabon ,Gabon,,,,
+, The Gambia ,The Gambia,,,,
+, Georgia ,Georgia,,,,
+, Germany ,Germany,,,,
+, Ghana ,Ghana,,,,
+, Greece ,Greece,,,,
+, Grenada ,Grenada,,,,
+, Guatemala ,Guatemala,,,,
+, Guinea ,Guinea,,,,
+, Guinea-Bissau ,Guinea-Bissau,,,,
+, Guyana ,Guyana,,,,
+, Haiti ,Haiti,,,,
+, Vatican City ,Vatican City,,,,
+, Honduras ,Honduras,,,,
+, Hungary ,Hungary,,,,
+, Iceland ,Iceland,,,,
+, India ,India,,,,
+, Indonesia ,Indonesia,,,,
+, Islamic Republic of Iran ,Islamic Republic of Iran,,,,
+, Iraq ,Iraq,,,,
+, Ireland ,Ireland,,,,
+, Israel ,Israel,,,,
+, Italy ,Italy,,,,
+, Jamaica ,Jamaica,,,,
+, Japan ,Japan,,,,
+, Jordan ,Jordan,,,,
+, Kazakhstan ,Kazakhstan,,,,
+, Kenya ,Kenya,,,,
+, Kiribati ,Kiribati,,,,
+, Kuwait ,Kuwait,,,,
+, Kyrgyzstan ,Kyrgyzstan,,,,
+, Laos ,Laos,,,,
+, Latvia ,Latvia,,,,
+, Lebanon ,Lebanon,,,,
+, Lesotho ,Lesotho,,,,
+, Liberia ,Liberia,,,,
+, Libya ,Libya,,,,
+, Liechtenstein ,Liechtenstein,,,,
+, Lithuania ,Lithuania,,,,
+, Luxembourg ,Luxembourg,,,,
+, Madagascar ,Madagascar,,,,
+, Malawi ,Malawi,,,,
+, Malaysia ,Malaysia,,,,
+, Maldives ,Maldives,,,,
+, Mali ,Mali,,,,
+, Malta ,Malta,,,,
+, Marshall Islands ,Marshall Islands,,,,
+, Mauritania ,Mauritania,,,,
+, Mauritius ,Mauritius,,,,
+, Mexico ,Mexico,,,,
+, Federated States of Micronesia ,Federated States of Micronesia,,,,
+, Republic of Moldova ,Republic of Moldova,,,,
+, Monaco ,Monaco,,,,
+, Mongolia ,Mongolia,,,,
+, Montenegro ,Montenegro,,,,
+, Morocco ,Morocco,,,,
+, Mozambique ,Mozambique,,,,
+, Myanmar ,Myanmar,,,,
+, Namibia ,Namibia,,,,
+, Nauru ,Nauru,,,,
+, Nepal ,Nepal,,,,
+, Netherlands ,Netherlands,,,,
+, New Zealand ,New Zealand,,,,
+, Nicaragua ,Nicaragua,,,,
+, Niger ,Niger,,,,
+, Nigeria ,Nigeria,,,,
+, North Korea ,North Korea,,,,
+, North Macedonia ,North Macedonia,,,,
+, Norway ,Norway,,,,
+, Oman ,Oman,,,,
+, Pakistan ,Pakistan,,,,
+, Palau ,Palau,,,,
+, Palestinian National Authority ,Palestinian National Authority,,,,
+, Panama ,Panama,,,,
+, Papua New Guinea ,Papua New Guinea,,,,
+, Paraguay ,Paraguay,,,,
+, Peru ,Peru,,,,
+, Philippines ,Philippines,,,,
+, Poland ,Poland,,,,
+, Portugal ,Portugal,,,,
+, Qatar ,Qatar,,,,
+, Romania ,Romania,,,,
+, ROC ,ROC,,,,
+, Rwanda ,Rwanda,,,,
+, Saint Kitts and Nevis ,Saint Kitts and Nevis,,,,
+, Saint Lucia ,Saint Lucia,,,,
+, Saint Vincent and the Grenadines ,Saint Vincent and the Grenadines,,,,
+, Samoa ,Samoa,,,,
+, San Marino ,San Marino,,,,
+, S����������� ,S�����������,,,,
+, Kingdom of Saudi Arabia ,Kingdom of Saudi Arabia,,,,
+, Senegal ,Senegal,,,,
+, Serbia ,Serbia,,,,
+, Seychelles ,Seychelles,,,,
+, Sierra Leone ,Sierra Leone,,,,
+, Singapore ,Singapore,,,,
+, Slovakia ,Slovakia,,,,
+, Slovenia ,Slovenia,,,,
+, Solomon Islands ,Solomon Islands,,,,
+, Somalia ,Somalia,,,,
+, South Africa ,South Africa,,,,
+, Republic of Korea ,Republic of Korea,,,,
+, South Sudan ,South Sudan,,,,
+, Spain ,Spain,,,,
+, Sri Lanka ,Sri Lanka,,,,
+, Sudan ,Sudan,,,,
+, Suriname ,Suriname,,,,
+, Sweden ,Sweden,,,,
+, Switzerland ,Switzerland,,,,
+, Syrian Arab Republic ,Syrian Arab Republic,,,,
+, Tajikistan ,Tajikistan,,,,
+, Tanzania ,Tanzania,,,,
+, Thailand ,Thailand,,,,
+, East Timor ,East Timor,,,,
+, Togo ,Togo,,,,
+, Tonga ,Tonga,,,,
+, Trinidad and Tobago ,Trinidad and Tobago,,,,
+, Tunisia ,Tunisia,,,,
+, Türkiye ,Türkiye,,,,
+, Turkmenistan ,Turkmenistan,,,,
+, Tuvalu ,Tuvalu,,,,
+, Uganda ,Uganda,,,,
+, Ukraine ,Ukraine,,,,
+, United Arab Emirates ,United Arab Emirates,,,,
+, Great Britain ,Great Britain,,,,
+, United States ,United States,,,,
+, Uruguay ,Uruguay,,,,
+, Uzbekistan ,Uzbekistan,,,,
+, Vanuatu ,Vanuatu,,,,
+, Venezuela ,Venezuela,,,,
+, Vietnam ,Vietnam,,,,
+, Yemen ,Yemen,,,,
+, Zambia ,Zambia,,,,
+, Zimbabwe ,Zimbabwe,,,,
