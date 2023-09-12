@@ -23,6 +23,29 @@ shinyServer(function(input, output, session) {
  
   
   
+  output$How<- renderUI({
+    HTML(
+      paste(
+        '<h2> <center> Multiple linear regression (MLR)</center> </h2>',
+        '<p> Multiple linear regression (MLR), also known simply as multiple regression, is a statistical technique that uses several explanatory variables to predict the outcome of a response variable. </p>',
+          '<p> The goal of multiple linear regression is to model the linear relationship between the explanatory (independent) variables and response (dependent) variables. In essence, multiple regression is the extension of ordinary least-squares (OLS) regression because it involves more than one explanatory variable.<p/>',
+        '<p>The objective of this app is to enable the user to build a multiple linear regression (MLR) model to predict which variables may influence a country to obtain more or fewer medals during the Olympic Games.</p>',
+          '<p>The provided dataset refers to the 2020 Summer Olympic Games.</p>',
+        
+        
+        "<p style='color:brown'> <b>Variables</b>: The user will see available independent and dependent variables in the dataset</p>",
+        "<p style='color:brown'><b> Data</b>: Displays all available data, can be filtered for developed or developing countries</p>",
+        "<p style='color:brown'><b>Data Summary</b>: Provides a summary of the variables</p>",
+        "<p style='color:brown'><b>Multicollinearity</b>: According to the selected independent variables, it shows the correlation matrix between them. It\'s important to note that the correlation should not be high; otherwise, the model won\'t be correct.</p>",
+        "<p style='color:brown'><b>Plots</b>: The first graph displays the correlation matrix between all independent variables and the dependent variable. The second graph illustrates this relationship and shows if the same is linear.</p>",
+        "<p style='color:brown'><b>Model</b>: MLR Model according to the chosen region and graphs to check for homoscedastic errors, normally distributed errors, and non-autocorrelated errors.</p>",
+        "<p style='color:brown'><b>Model: Developed x Underdeveloped Countries</b>: A model that compares a regression done only with developed countries and another done only with developing countries.</p>"
+      )
+    )
+  })
+  
+  
+  
   output$Variables <-
     renderUI({
       HTML(
@@ -33,7 +56,7 @@ shinyServer(function(input, output, session) {
           "<li style='color:blue'>Silver: Silver medals </li>",
           "<li style='color:blue'>Bronze: Bronze medals</li>",
           "<li style='color:blue'> Total: Total medals</li>",
-          "<li style='color:blue'>% of medals won out of all medals: Rank medals</li>",
+          "<li style='color:blue'>Rank: % of medals won out of all medals</li>",
           "</ul>",
           "<b>  Dependent variables </b>",
           "<ul>",
@@ -186,9 +209,9 @@ shinyServer(function(input, output, session) {
       scale_color_manual(values = c("chocolate", "gold1")) +
       
       labs(
-        x = NULL,
+        x = 'Year',
         y = "Number of Nations",
-        title = "Nations, Athletes and Events",
+        title = "Number of Nations - Olympic Games from 1896 to 2020",
         subtitle = "Olympic Games from 1896 to 2020",
         caption = "Source: Kaggle"
       ) +
@@ -234,6 +257,10 @@ shinyServer(function(input, output, session) {
   
   output$Summ_old <- renderPrint(skim(InputDataset()))
   
+  
+  
+  
+  
   output$structure <- renderDataTable({
     
     options = list(scrollX = TRUE,
@@ -246,12 +273,12 @@ shinyServer(function(input, output, session) {
   
   
   
-  set.seed(100)  # setting seed to reproduce results of random sampling
+  set.seed(100)  
   trainingRowIndex <-
     reactive({
       sample(1:nrow(InputDataset_model()),
              splitSlider() * nrow(InputDataset_model()))
-    })# row indices for training data
+    })
   
   trainingData <- reactive({
     tmptraindt <- InputDataset_model()
@@ -315,22 +342,7 @@ shinyServer(function(input, output, session) {
     )
   })
   
- 
-  
-  # output$Plots <- renderPlot ({ ggplot(df, aes(input$Corr, input$SelectY, color = Country_status)) +
-  #     geom_point() +
-  #     labs(x=NULL) +    # remove axis title
-  #     facet_wrap(
-  #       ~input$Corr,
-  #       strip.position = "bottom") +  # move strip position
-  #     theme(
-  #       strip.placement = "outside",   # format to look like title
-  #       strip.background = element_blank()
-  #     )
-  # 
-  # })
-  
-  
+
   
   
   #Code section for Linear Regression-----------------------------------------------------------------------------
@@ -420,13 +432,5 @@ shinyServer(function(input, output, session) {
         out = 'Lm_1.doc'
       )
     )
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
 })

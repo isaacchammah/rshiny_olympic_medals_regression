@@ -37,7 +37,7 @@ library(shinyWidgets)
 library(MASS)
 library(fresh)
 library(car)
-library('skimr')
+library(skimr)
 
 o_m <-
   read_csv(

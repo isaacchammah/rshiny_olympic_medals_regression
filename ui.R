@@ -32,7 +32,7 @@ dashboardPage(
   
   dashboardBody(div(style = "display:flex; justify-content:center;",
                     img(
-                      src = "medals.jpg",
+                      src = "medals2.jpg",
                       width = "150px",
                       height = "75px"
                     )), 

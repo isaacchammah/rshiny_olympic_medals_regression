@@ -1,26 +1,24 @@
 
-All
-===================================================================
-                                               NA                  
--------------------------------------------------------------------
-Gdp                                        0.0000***               
-                                            (0.0000)               
-                                                                   
-Population                                  -0.01**                
-                                             (0.01)                
-                                                                   
-Country_statusUnderdeveloped                -3.75***               
-                                             (1.29)                
-                                                                   
-Constant                                    5.71***                
-                                             (1.06)                
-                                                                   
-N                                             191                  
-R2                                            0.70                 
-Adjusted R2                                   0.69                 
-Residual Std. Error                     8.03 (df = 187)            
-F Statistic                         144.02*** (df = 3; 187)        
-===================================================================
-Notes:                       ***Significant at the 1 percent level.
-                              **Significant at the 5 percent level.
-                              *Significant at the 10 percent level.
+Developed Underdeveloped
+=================================================================
+                                         NA                      
+                             (1)                    (2)          
+-----------------------------------------------------------------
+Gdp                       0.0000***              0.0000***       
+                           (0.0000)               (0.0000)       
+                                                                 
+Life_expectancy            1.13***                  0.11         
+                            (0.39)                 (0.08)        
+                                                                 
+Constant                  -83.58***                -6.80         
+                           (30.63)                 (5.79)        
+                                                                 
+N                             60                    125          
+R2                           0.78                   0.32         
+Adjusted R2                  0.78                   0.31         
+Residual Std. Error    10.48 (df = 57)        5.97 (df = 122)    
+F Statistic         103.79*** (df = 2; 57) 29.17*** (df = 2; 122)
+=================================================================
+Notes:                     ***Significant at the 1 percent level.
+                            **Significant at the 5 percent level.
+                            *Significant at the 10 percent level.
