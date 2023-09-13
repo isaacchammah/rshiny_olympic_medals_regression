@@ -366,5 +366,17 @@ skim(df)
 # Population                                  -0.01**                
 #   (0.01)                
 # 
-# Country_statusUnderdeveloped                -3.75***               
+# Country_statusUnderdeveloped                -3.75***       
+
+
+o_m_5%>%filter(year=='2012')
+
+
+
+#ano de 2012??
+# tirar a virgula do slider
+#countries/olympic game
+#medalhas - filtro
+#trocar
+# Model
 #   (1.29) 

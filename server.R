@@ -31,7 +31,7 @@ shinyServer(function(input, output, session) {
           '<p> The goal of multiple linear regression is to model the linear relationship between the explanatory (independent) variables and response (dependent) variables. In essence, multiple regression is the extension of ordinary least-squares (OLS) regression because it involves more than one explanatory variable.<p/>',
         '<p>The objective of this app is to enable the user to build a multiple linear regression (MLR) model to predict which variables may influence a country to obtain more or fewer medals during the Olympic Games.</p>',
           '<p>The provided dataset refers to the 2020 Summer Olympic Games.</p>',
-        
+        '<b>Tabs </b>',
         
         "<p style='color:brown'> <b>Variables</b>: The user will see available independent and dependent variables in the dataset</p>",
         "<p style='color:brown'><b> Data</b>: Displays all available data, can be filtered for developed or developing countries</p>",
@@ -50,7 +50,7 @@ shinyServer(function(input, output, session) {
     renderUI({
       HTML(
         paste(
-          "<b>  Independent variables </b>",
+          "<b>  Dependent variables </b>",
           "<ul>",
           "<li style='color:blue'> Gold: Gold medals </li>",
           "<li style='color:blue'>Silver: Silver medals </li>",
@@ -58,7 +58,7 @@ shinyServer(function(input, output, session) {
           "<li style='color:blue'> Total: Total medals</li>",
           "<li style='color:blue'>Rank: % of medals won out of all medals</li>",
           "</ul>",
-          "<b>  Dependent variables </b>",
+          "<b>  Independent variables </b>",
           "<ul>",
           "<li style='color:green'>Country: Name of the country.</li>",
           "<li style='color:green'>Density (P/Km2): Population density measured in persons per square kilometer.</li>",
@@ -166,7 +166,7 @@ shinyServer(function(input, output, session) {
         hoverinfo = 'text'
       )  %>%
       layout(geo = graph_properties,
-             title = "Summer Olympics medals rank \n1896 - 2020",
+             title = "Countries/olympic gamerank \n1896 - 2020",
              font = list(family = "DM Sans")) %>%
       config(displayModeBar = FALSE)
   })

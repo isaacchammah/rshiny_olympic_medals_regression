@@ -142,7 +142,7 @@ dashboardPage(
                            )),
                   
                   
-                  tabPanel("Multicoliniarity",
+                  tabPanel("Multicollinearity",
                            box(withSpinner(
                              plotOutput("Multi")
                            ), width = 12)),
@@ -169,9 +169,15 @@ dashboardPage(
                   tabPanel("Model: Develod x Underdeveloped Countries",
                            box(
                              withSpinner(verbatimTextOutput("Model2")),
-                             width = 12,
+                             width = 6,
                              title = "Model Summary"
                            )),
+                  
+                  tabPanel("Conclusion",
+                           box(withSpinner(
+                             htmlOutput("Conclusion"),
+                           ), width = 6, ), ),
+                  
                   
                 )
               )),
@@ -189,7 +195,7 @@ dashboardPage(
                     "Ranking",
                     sliderInput(
                       inputId = "year1",
-                      label = "Position",
+                      label = "Year range",
                       min = min(o_m_5$year),
                       max = max(o_m_5$year),
                       value = c(min(o_m_5$year), max(o_m_5$year)),
@@ -205,21 +211,21 @@ dashboardPage(
                            box(
                              withSpinner(plotlyOutput("mymap")),
                              width = 12,
-                             title = "Map"
+                             #title = "Map"
                            ), ),
                   
-                  tabPanel("Ranking",
+                  tabPanel("Medals",
                            box(
                              withSpinner(plotlyOutput("myranking")),
                              width = 12,
-                             title = "Ranking"
+                             #title = "Ranking"
                            ), ),
                   
                   tabPanel("Countries",
                            box(
                              withSpinner(plotlyOutput("Countries")),
                              width = 12,
-                             title = "Countries per game"
+                             #title = "Countries per game"
                            ), )
                   
                   
