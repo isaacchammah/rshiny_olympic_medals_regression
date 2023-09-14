@@ -38,33 +38,30 @@ library(MASS)
 library(fresh)
 library(car)
 library(skimr)
+library(RSQLite)
+library(data.table)
+library(forcats)
+
+
+
+
 
 o_m <-
   read_csv(
     "C:/Users/danie/OneDrive/Desktop/DATA SCIENCE/R/Shiny/Olympics/Olympics/Olympic_Games_Medal_Tally.csv"
   )
 
-# View(o_m)
-# head(o_m)
 
 o_m = o_m %>% mutate (Summer =  gsub("[[:digit:]]", "", edition))
-# unique(o_m$Summer)
 o_m = o_m %>% filter(Summer == " Summer Olympics")
 
-# print(o_m, n=20)
 total = o_m %>% group_by(year) %>% summarise(total_games_medal = sum(gold) + sum(silver) + sum(bronze))
-# total
 
 o_m_2 = inner_join(o_m, total, by = 'year')
-# print(o_m_2,n=20)
 o_m_3 = o_m_2 %>% mutate(rank = total / total_games_medal)
-o_m_3
-# unique(o_m_3$year)
 
 o_m_2020 = o_m_3 %>% filter(year == '2020')
-# view(o_m_2020)
 
-# names(o_m_2020)
 
 countries <-
   read_csv(
@@ -77,16 +74,7 @@ o_m_2020 = o_m_2020 %>%  rename(Country = country)
 
 df = inner_join(o_m_2020, countries, by = 'Country')
 
-
-view(df)
-
-
-
 paises = as.data.frame(unique(o_m_3$country))
-
-# write.csv(paises,
-# "C:/Users/danie/OneDrive/Desktop/DATA SCIENCE/R/Shiny/Olympics/Olympics/latlon.csv",
-# row.names = FALSE)
 
 average_latitude_longitude_countries <-
   read_excel(
@@ -94,7 +82,6 @@ average_latitude_longitude_countries <-
   )
 average_latitude_longitude_countries$lat = as.numeric(average_latitude_longitude_countries$lat)
 class(average_latitude_longitude_countries$lat)
-# view(average_latitude_longitude_countries)
 average_latitude_longitude_countries$lng = as.numeric(average_latitude_longitude_countries$lng)
 
 o_m_4 = inner_join(o_m_3, average_latitude_longitude_countries, by = 'country')
@@ -160,10 +147,9 @@ df = df %>% mutate_at(
 
 names(df)
 sum(is.na(df))
-# df = na.omit(df)
 dim(df)
 
-rows_with_na <- df [!complete.cases(df),]
+rows_with_na <- df [!complete.cases(df), ]
 print (rows_with_na)
 
 names(df)
@@ -175,11 +161,17 @@ df =  df %>% dplyr::select (
   -Total_games_medal,
   -Summer,
   -Currency_code,
-  -Abbreviation
+  -Abbreviation,
+  -Latitude,
+  -Longitude
 )
 
 
-df = df %>% mutate(Land_area_km2=Land_area_km2/1000000, Population=Population/1000000, Gdp = Gdp/1000000 ) 
+df = df %>% mutate(
+  Land_area_km2 = Land_area_km2 / 1000000,
+  Population = Population / 1000000,
+  Gdp = Gdp / 1000000
+)
 
 
 df = df %>% mutate (Gdp_capta = (Gdp / Population))
@@ -240,10 +232,8 @@ names(xnames)
 
 xnames2 = xnames %>% dplyr::select (-Country_status)
 
-df <- df %>% 
-  mutate(across(all_of(names(xnames2)), ~log(.x), .names = 'log_{col}'))
-
-
+df <- df %>%
+  mutate(across(all_of(names(xnames2)), ~ log(.x), .names = 'log_{col}'))
 
 xnames3 =  df %>%  dplyr::select(
   -Rank,
@@ -262,84 +252,24 @@ xnames3 =  df %>%  dplyr::select(
 )
 
 
-
-
-# Total ~ Density_p_km2 + Land_area_km2 + Armed_forces_size + Birth_rate + 
-#   Co2_emissions + Fertility_rate + Gasoline_price + Infant_mortality + 
-#   Life_expectancy + Maternal_mortality_ratio + Population + 
-#   Population_labor_force_participation_percent + Unemployment_rate + 
-#   Urban_population + Latitude + Longitude + Gdp_capta + log_Density_p_km2 + 
-#   log_Agricultural_land_percent + log_Birth_rate + log_Fertility_rate + 
-#   log_Gasoline_price + log_Gdp + log_Infant_mortality + log_Life_expectancy + 
-#   log_Maternal_mortality_ratio + log_Physicians_per_thousand + 
-#   log_Population + log_Urban_population + log_Gdp_capta
-# 
-# Total ~ Land_area_km2 + Armed_forces_size + Birth_rate + Co2_emissions + 
-#   Fertility_rate + Population + log_Agricultural_land_percent + 
-#   log_Birth_rate + log_Fertility_rate + log_Gasoline_price + 
-#   log_Gdp
-
-
-summary(lm(
-  Total ~ Land_area_km2 + Armed_forces_size + Birth_rate + Co2_emissions +
-    Fertility_rate + Population + log_Agricultural_land_percent +
-    log_Birth_rate + log_Fertility_rate + log_Gasoline_price +
-    log_Gdp, data=df
-))
-
-
-df =
-  df %>% mutate(Has_medal= ifelse(Total >0, 1, 0))
-
-logit.overall =
-  glm(
-    Has_medal ~ Land_area_km2 +
-      Armed_forces_size +
-      Birth_rate +
-      Co2_emissions +
-      Fertility_rate +
-      Population +
-      log_Agricultural_land_percent +
-      log_Birth_rate +
-      log_Fertility_rate +
-      log_Gasoline_price +
-      log_Gdp,
-    data = df,
-    family = "binomial"
-  )
-
-
-newdata =
-  with(df, data.frame (
-    Land_area_km2 = mean(Land_area_km2) ,
-    Armed_forces_size = mean(Armed_forces_size) ,
-    Birth_rate = mean(Birth_rate) ,
-    Co2_emissions = mean(Co2_emissions) ,
-    Fertility_rate= mean(Fertility_rate) ,
-    Population = mean(Population) ,
-    g_Agricultural_land_percent=  mean(log_Agricultural_land_percent) ,
-    log_Birth_rate= mean(log_Birth_rate) ,
-    log_Fertility_rate= mean(log_Fertility_rate) ,
-    log_Gasoline_price= mean(log_Gasoline_price) ,
-    log_Gdp= mean(log_Gdp)
-  ))
-
-
-
 # o_m_6 %>% group_by(year) %>
-  
-hystoric = sports %>% mutate (Summer =  gsub("[[:digit:]]", "", edition), Year = parse_number(edition)) %>% 
- filter (Summer==' Summer Olympics')  %>%  group_by(Year) %>% summarise(Countries =n_distinct(country_noc ))
+
+hystoric = sports %>% mutate (Summer =  gsub("[[:digit:]]", "", edition),
+                              Year = parse_number(edition)) %>%
+  filter (Summer == ' Summer Olympics')  %>%  group_by(Year) %>% summarise(Countries =
+                                                                             n_distinct(country_noc))
 
 hystoric %>%
   
   ggplot(aes(x = Year, y = Countries)) +
   
-  geom_point(size = 3, shape = 21, fill = "white") +
+  geom_point(size = 3,
+             shape = 21,
+             fill = "white") +
   
   geom_line(size = 1.5) +
   
-  scale_color_manual(values = c("chocolate","deepskyblue4")) + 
+  scale_color_manual(values = c("chocolate", "deepskyblue4")) +
   
   labs(
     x = NULL,
@@ -360,23 +290,7 @@ hystoric %>%
 skim(df)
 
 
-# Gdp                                        0.0000***               
-#   (0.0000)               
-# 
-# Population                                  -0.01**                
-#   (0.01)                
-# 
-# Country_statusUnderdeveloped                -3.75***       
-
-
-o_m_5%>%filter(year=='2012')
-
-
-
 #ano de 2012??
 # tirar a virgula do slider
-#countries/olympic game
 #medalhas - filtro
 #trocar
-# Model
-#   (1.29) 

@@ -1,13 +1,6 @@
 shinyServer(function(input, output, session) {
-  observeEvent(input$Region, {
-    updatePickerInput(
-      session = session,
-      inputId = "Region",
-      options = pickerOptions(selectedTextFormat = 'values')
-    )
-  }, ignoreInit = TRUE)
-  
-  
+
+#Tab Motivation------------------------------------------------------------------------------------------------------
   
   output$Motivation<- renderUI({
     HTML(
@@ -20,9 +13,154 @@ shinyServer(function(input, output, session) {
     )
   })
   
+  
+#Tab Data------------------------------------------------------------------------------------------------------
+  
+  
+  output$slide = renderPlot({
+    o_m_5 %>%
+      filter(position <= 3, year >= input$year1[1], year <= input$year1[2]) %>%
+      ggplot(aes(
+        x = year,
+        y = position,
+        color = country,
+        text = paste("country:", country)
+      )) +
+      geom_bump() +
+      geom_point(size = 6) +
+      coord_cartesian(xlim = input$year1)  +
+      scale_y_reverse(breaks = seq(1, 3, by = 1)) + geom_smooth()
+    
+  })
+  
+  
+  graph_properties <- list(
+    scope = 'world',
+    showland = TRUE,
+    landcolor = toRGB("white"),
+    color = toRGB("white")
+  )
+  
+  font = list(family = "DM Sans",
+              size = 15,
+              color = "black")
+  
+  label = list(bgcolor = "#EEEEEE",
+               bordercolor = "transparent",
+               font = font)
+  
+ 
+  output$mymap = renderPlotly({
+    plot_geo(o_m_6, locationmode = "world",
+             frame = ~ Year) %>%
+      add_trace(
+        locations = ~ Code,
+        z = ~ Position,
+        zmin = 0,
+        zmax = max(o_m_6$Position),
+        color = ~ Position,
+        colorscale = "Hot ",
+        text = ~ Hover,
+        hoverinfo = 'text'
+      )  %>%
+      layout(geo = graph_properties,
+             title = "Countries/olympic gamerank \n1896 - 2020",
+             font = list(family = "DM Sans")) %>%
+      config(displayModeBar = FALSE)
+  })
+  
+  
+
+  output$myranking = renderPlotly({
+    top_10 <- medals %>%
+      
+      group_by(Country) %>%
+      
+      summarise(Total_Count = sum(Count)) %>%
+      
+      top_n(10, Total_Count) %>%
+      
+      arrange((Total_Count))
+    
+    ggplot(
+      medals %>% filter(Country %in% top_10$Country, Medal != "Total"),
+      
+      aes(
+        x = (Country),
+        
+        y = Count,
+        
+        fill = Medal
+        
+      )
+      
+    ) +
+      
+      geom_col() +
+      
+      coord_flip() +
+      
+      scale_fill_manual(values = c("gold1", "gray70", "gold4", "blue")) +
+      
+      ggtitle("Historical medal counts from Competitions") +
+      
+      theme(plot.title = element_text(hjust = 0.5))
+    
+  })
+  
+  
+  output$Countries= renderPlotly({
+    hystoric %>%
+      
+      ggplot(aes(x = Year, y = Countries)) +
+      
+      geom_point(size = 3, shape = 21, fill = "white") +
+      
+      geom_line(color = "gold1", size = 1.5) + 
+      
+      scale_color_manual(values = c("chocolate", "gold1")) +
+      
+      labs(
+        x = 'Year',
+        y = "Number of Nations",
+        title = "Number of Nations - Olympic Games from 1896 to 2020",
+        subtitle = "Olympic Games from 1896 to 2020",
+        caption = "Source: Kaggle"
+      ) +
+      
+      theme_minimal() +
+      
+      theme(
+        plot.title = element_text(size = 18, face = "bold"),
+        plot.subtitle = element_text(size = 14, face = "bold"),  
+        axis.text.x = element_text(angle = 90, vjust = 0.5),
+        panel.grid.major.x = element_blank()
+      )
+  })
+  
+  
+#Tab Regression------------------------------------------------------------------------------------------------------
  
   
+  observeEvent(input$Region, {
+    updatePickerInput(
+      session = session,
+      inputId = "Region",
+      options = pickerOptions(selectedTextFormat = 'values')
+    )
+  }, ignoreInit = TRUE)
   
+  
+  InputDataset_model <- reactive({
+    if (is.null(input$SelectX)) {
+      dt <- df
+    }
+    else{
+      dt <- df[, c(input$SelectX)]
+    }
+  })
+  
+
   output$How<- renderUI({
     HTML(
       paste(
@@ -31,6 +169,8 @@ shinyServer(function(input, output, session) {
           '<p> The goal of multiple linear regression is to model the linear relationship between the explanatory (independent) variables and response (dependent) variables. In essence, multiple regression is the extension of ordinary least-squares (OLS) regression because it involves more than one explanatory variable.<p/>',
         '<p>The objective of this app is to enable the user to build a multiple linear regression (MLR) model to predict which variables may influence a country to obtain more or fewer medals during the Olympic Games.</p>',
           '<p>The provided dataset refers to the 2020 Summer Olympic Games.</p>',
+        '<p>Data was colected from 192 out of the 206 teams that participated in the games </p>',
+        
         '<b>Tabs </b>',
         
         "<p style='color:brown'> <b>Variables</b>: The user will see available independent and dependent variables in the dataset</p>",
@@ -44,8 +184,7 @@ shinyServer(function(input, output, session) {
     )
   })
   
-  
-  
+
   output$Variables <-
     renderUI({
       HTML(
@@ -93,19 +232,15 @@ shinyServer(function(input, output, session) {
           "<li style='color:green'>Total Tax Rate: Overall tax burden as a percentage of commercial profits.</li>",
           "<li style='color:green'>Unemployment Rate: Percentage of the labor force that is unemployed.</li>",
           "<li style='color:green'>Urban Population: Percentage of the population living in urban areas.</li>",
-          "<li style='color:green'>Latitude: Latitude coordinate of the country's location.</li>",
-          "<li style='color:green'>Longitude: Longitude coordinate of the country's location.</li>",
           "<li style='color:green'>Country Status: If the GDP/capta was lower then $12,000 the country was considered Underdeveloped, else Developed </li>",
-          "<li style='color:red'>All dependent variables can also be chosen in their log form</li>",
+          "<li style='color:red'>All independent variables can also be chosen in their log form</li>",
           "</ul>",
           collapse = "\n"
         )
       )
     })
   
-  
-  
-  
+#choose type of data to be displayed 
   InputDataset <- reactive({
     region <- input$Region
     
@@ -118,187 +253,9 @@ shinyServer(function(input, output, session) {
     
   })
   
-  output$slide = renderPlot({
-    o_m_5 %>%
-      filter(position <= 3, year >= input$year1[1], year <= input$year1[2]) %>%
-      ggplot(aes(
-        x = year,
-        y = position,
-        color = country,
-        text = paste("country:", country)
-      )) +
-      geom_bump() +
-      geom_point(size = 6) +
-      coord_cartesian(xlim = input$year1)  +
-      scale_y_reverse(breaks = seq(1, 3, by = 1)) + geom_smooth()
-    
-  })
   
-  
-  graph_properties <- list(
-    scope = 'world',
-    showland = TRUE,
-    landcolor = toRGB("white"),
-    color = toRGB("white")
-  )
-  
-  font = list(family = "DM Sans",
-              size = 15,
-              color = "black")
-  
-  label = list(bgcolor = "#EEEEEE",
-               bordercolor = "transparent",
-               font = font)
-  
-  
-  
-  output$mymap = renderPlotly({
-    plot_geo(o_m_6, locationmode = "world",
-             frame = ~ Year) %>%
-      add_trace(
-        locations = ~ Code,
-        z = ~ Position,
-        zmin = 0,
-        zmax = max(o_m_6$Position),
-        color = ~ Position,
-        colorscale = "Hot ",
-        text = ~ Hover,
-        hoverinfo = 'text'
-      )  %>%
-      layout(geo = graph_properties,
-             title = "Countries/olympic gamerank \n1896 - 2020",
-             font = list(family = "DM Sans")) %>%
-      config(displayModeBar = FALSE)
-  })
-  
-  
-  
-  output$myranking= renderPlotly({
-    top_10 <- medals %>%
-      group_by(Country) %>%
-      summarise(Total_Count = sum(Count)) %>%
-      top_n(10, Total_Count) %>%
-      arrange(desc(Total_Count))
-    
-    ggplot(
-      medals %>% filter(Country %in% top_10$Country, Medal != "Total"),
-      aes(
-        x = (Country),
-        y = Count,
-        fill = Medal
-      )
-    ) +
-      geom_col() +
-      coord_flip() +
-      scale_fill_manual(values = c("gold1", "gray70", "gold4", "blue")) +
-      ggtitle("Historical medal counts from Competitions") +
-      theme(plot.title = element_text(hjust = 0.5))
-  })
-  
-  
-  
-  output$Countries= renderPlotly({
-    hystoric %>%
-      
-      ggplot(aes(x = Year, y = Countries)) +
-      
-      geom_point(size = 3, shape = 21, fill = "white") +
-      
-      geom_line(color = "gold1", size = 1.5) + 
-      
-      scale_color_manual(values = c("chocolate", "gold1")) +
-      
-      labs(
-        x = 'Year',
-        y = "Number of Nations",
-        title = "Number of Nations - Olympic Games from 1896 to 2020",
-        subtitle = "Olympic Games from 1896 to 2020",
-        caption = "Source: Kaggle"
-      ) +
-      
-      theme_minimal() +
-      
-      theme(
-        plot.title = element_text(size = 18, face = "bold"),
-        plot.subtitle = element_text(size = 14, face = "bold"),  
-        axis.text.x = element_text(angle = 90, vjust = 0.5),
-        panel.grid.major.x = element_blank()
-      )
-  })
-  
-  
-  
-  
-  
-  
-  
-  InputDataset_model <- reactive({
-    if (is.null(input$SelectX)) {
-      dt <- df
-    }
-    else{
-      dt <- df[, c(input$SelectX)]
-    }
-    
-  })
-  
-  
-  # observe({
-  #   lstname <- names(InputDataset())
-  #   updateSelectInput(session = session,
-  #                     inputId = "SelectY",
-  #                     choices = lstname)
-  # })
-  
-  splitSlider <- reactive({
-    input$Slider1 / 100
-  })
-  
-  
-  output$Summ_old <- renderPrint(skim(InputDataset()))
-  
-  
-  
-  
-  
-  output$structure <- renderDataTable({
-    
-    options = list(scrollX = TRUE,
-                   columnDefs = list(
-                     list(className = "dt-left", targets = "_all")
-                   ))
-    
-    datatable(InputDataset())
-  })
-  
-  
-  
-  set.seed(100)  
-  trainingRowIndex <-
-    reactive({
-      sample(1:nrow(InputDataset_model()),
-             splitSlider() * nrow(InputDataset_model()))
-    })
-  
-  trainingData <- reactive({
-    tmptraindt <- InputDataset_model()
-    tmptraindt[trainingRowIndex(),]
-  })
-  
-  testData <- reactive({
-    tmptestdt <- InputDataset_model()
-    tmptestdt[-trainingRowIndex(), ]
-  })
-  
-  
-  
-  output$cntTrain <-
-    renderText(paste("Train Data:", NROW(trainingData()), "records"))
-  output$cntTest <-
-    renderText(paste("Test Data:", NROW(testData()), "records"))
-  
-  
-  
+#slider for data visualization    
+#data visualization 
   
   output$Data <- renderDT({
     datatable(InputDataset(),
@@ -309,6 +266,11 @@ shinyServer(function(input, output, session) {
   })
   
   
+#summarizing the data  
+output$Summ_old <- renderPrint(skim(InputDataset()))
+  
+  
+#Multicolliniarity - Correlation matrix between x variables     
   output$Multi <- renderPlot({
     corrplot(
       cor(df %>% dplyr::select(input$Corr), use = "complete.obs"),
@@ -319,7 +281,7 @@ shinyServer(function(input, output, session) {
   })
   
   
-  
+#Correlation matrix between x variables and y variable 
   output$Corr <- renderPlot({
     corrplot(
       cor(df %>% dplyr::select(input$SelectY, input$Corr), use = "complete.obs"),
@@ -330,6 +292,7 @@ shinyServer(function(input, output, session) {
   })
   
   
+#scatterplot between variables  
   output$Plots <- renderPlot ({
     ggpairs(
       df,
@@ -344,8 +307,7 @@ shinyServer(function(input, output, session) {
   
 
   
-  
-  #Code section for Linear Regression-----------------------------------------------------------------------------
+#Code section for Linear Regression-----------------------------------------------------------------------------
   
   f <- reactive({
     as.formula(paste(input$SelectY, "~", paste(input$Corr, collapse = "+")))
@@ -364,7 +326,8 @@ shinyServer(function(input, output, session) {
     
     lm(f(), data = df_filtered)
   })
-  
+
+#General Model    
   output$Model <-
     renderPrint(
       stargazer(
@@ -378,27 +341,16 @@ shinyServer(function(input, output, session) {
     )
   
   
-  
-  output$text1 <- renderUI({ 
-    HTML(
-      paste(
-        "<center><h3> Model using search method for feature selection stepwise regression function 
-      stepAIC <h3>", "<h6> Total ~ Land_area_km2 + Armed_forces_size + Birth_rate + Co2_emissions +
-      Fertility_rate + Population + log_Agricultural_land_percent +
-      log_Birth_rate + log_Fertility_rate + log_Gasoline_price +
-      log_Gdp </h6></center>" )
-    )
-  })
-  
+#General Model residual plots
   
   output$residualPlots <- renderPlot({
-    par(mfrow = c(2, 2)) # Change the panel layout to 2 x 2
+    par(mfrow = c(2, 2)) 
     plot(Linear_Model())
-    par(mfrow = c(1, 1)) # Change back to 1 x 1
+    par(mfrow = c(1, 1))
     
   })
   
-  
+#Develoed X Underdeveloped Model    
   Linear_Model2 <- reactive({
     region <- input$Region
     
@@ -432,5 +384,85 @@ shinyServer(function(input, output, session) {
         out = 'Lm_1.doc'
       )
     )
+  
+#AIC model
+  
+  Linear_Model4 <- reactive({
+    region <- input$Region
+    
+    if (region == 'All') {
+      return(lm(f(), data = df))
+    }
+    
+    df_filtered <- df %>%
+      filter(Country_status == region)
+    
+    lm(f(), data = df_filtered)
+  })
+  
+  
+  output$Model3 <-
+    renderPrint(
+      stargazer(stepAIC(
+        Linear_Model4()
+        ),
+        type = 'text',
+        digits = 2,
+        title = 'All',
+        style = 'qje',
+        out = 'Lm_1.doc'
+      )
+    )
+#AIC residual plot  
+  output$residualPlots2 <- renderPlot({
+    par(mfrow = c(2, 2)) 
+    plot(Linear_Model4())
+    par(mfrow = c(1, 1))
+    
+  })
+  
+  
+
+  
+  best_model= (lm(Total ~ Density_p_km2 + Land_area_km2 + Armed_forces_size + Birth_rate +
+                    Co2_emissions + Fertility_rate + Gasoline_price + Infant_mortality +
+                    Life_expectancy + Maternal_mortality_ratio + Population +
+                    Population_labor_force_participation_percent + Unemployment_rate +
+                    Urban_population + Gdp_capta + Country_status + log_Density_p_km2 +
+                    log_Agricultural_land_percent + log_Birth_rate + log_Fertility_rate +
+                    log_Gasoline_price + log_Gdp + log_Life_expectancy + log_Maternal_mortality_ratio +
+                    log_Physicians_per_thousand + log_Population + log_Urban_population +
+                    log_Gdp_capta, data = df ))
+    
+  
+  output$Model4 <-
+    renderPrint(
+      summary(stepAIC(
+      best_model
+      ),
+      type = 'text',
+      digits = 2,
+      title = 'All',
+      style = 'qje',
+      out = 'Lm_1.doc'
+      )
+    )
+  #AIC residual plot  
+  output$residualPlots3 <- renderPlot({
+    par(mfrow = c(2, 2)) 
+    plot(best_model)
+    par(mfrow = c(1, 1))
+    
+  })
+  
+
 
 })
+
+
+
+
+
+
+
+
