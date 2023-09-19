@@ -1,28 +1,15 @@
 #App theme------------------------------------------------------------------------------------------------------
 
 
-mytheme <- create_theme(
-  adminlte_color(light_blue = "#eeb609"),
-  adminlte_sidebar(
-    width = "300px",
-    dark_bg = "#D8DEE9",
-    dark_hover_bg = "#81A1C1",
-    dark_color = "#2E3440"
-  ),
-  adminlte_global(
-    content_bg = "#FFF",
-    box_bg = "#D8DEE9",
-    info_box_bg = "#D8DEE9"
-  )
-)
+mytheme <- shinytheme ("paper")
 
 
 #Dashboard------------------------------------------------------------------------------------------------------
 
 
-dashboardPage(
+shinyUI(dashboardPage(
   skin = 'purple' ,
-  dashboardHeader(title = "Olympics Medals", dropdownMenuOutput("msgOutput")),
+  dashboardHeader(title = "Olympics Medals Prediction", dropdownMenuOutput("msgOutput")),
   dashboardSidebar(sidebarMenu(
     id = "tabs",
     menuItem("Motivation", tabName = "Motivation", icon = icon("home")),
@@ -37,7 +24,13 @@ dashboardPage(
 #Medals image------------------------------------------------------------------------------------------------------
   
   dashboardBody(
-    div(style = "display:flex; justify-content:center;",
+    
+    tags$head(tags$style(HTML('.content-wrapper, .right-side {
+                                background-color: #ffff;}'))),
+    
+    
+    
+    div(style = "display:flex; justify-content:center; background-color:white;",
         img(
           src = "medals2.jpg",
           width = "150px",
@@ -49,12 +42,10 @@ dashboardPage(
     use_theme(mytheme),
     
     
-    
-    
 #Tab Motivation------------------------------------------------------------------------------------------------------
     
     
-    tabItems(
+    tabItems( 
       tabItem(tabName = "Motivation",
               fluidPage(
                 tabBox(
@@ -63,10 +54,10 @@ dashboardPage(
                   width = 12,
                   
                   
-                  tabPanel("Motivation",
+                  tabPanel("",
                            box(withSpinner(
                              htmlOutput("Motivation"),
-                           ), width = 12,),),
+                           ), width = 12,border=TRUE,),),
                   
                   
                 ),
@@ -79,46 +70,35 @@ dashboardPage(
       
       
       tabItem(tabName = "Data",
-              fluidPage(
-                tabBox(
-                  id = "tabset1",
-                  height = "1000px",
-                  width = 12,
-                  
-                  tabPanel(
-                    "Ranking",
-                    sliderInput(
-                      inputId = "year1",
-                      label = "Year range",
-                      min = min(o_m_5$year),
-                      max = max(o_m_5$year),
-                      value = c(min(o_m_5$year), max(o_m_5$year)),
-                      step = 4
-                    ),
-                    box(withSpinner(plotOutput("slide")), width = 12, title = "Diagnostic Plots"),
-                    
-                  ),
-                  
-                  
-                  tabPanel("Map",
-                           box(withSpinner(
-                             plotlyOutput("mymap")
-                           ),
-                           width = 12,),),
-                  
-                  tabPanel("Medals",
-                           box(withSpinner(
-                             plotlyOutput("myranking")
-                           ),
-                           width = 12,),),
-                  
-                  tabPanel("Countries",
-                           box(withSpinner(
-                             plotlyOutput("Countries")
-                           ),
-                           width = 12,),)
-                  
+              fluidPage( style="background-color:white;",
+                sliderInput(
+                  inputId = "year1",
+                  label = "Year range",
+                  min = min(o_m_5$year),
+                  max = max(o_m_5$year),
+                  value = c(min(o_m_5$year), max(o_m_5$year)),
+                  step = 4,
                 ),
+                box(
+                  withSpinner(plotOutput("slide")), 
+                  width = 12, 
+                  title = ""
+                ),
+                box(
+                  withSpinner(plotlyOutput("mymap")),
+                  width = 12,
+                  title = ""
+                ),
+                box(
+                  withSpinner(plotlyOutput("myranking")),
+                  width = 12,
+                  title = ""
+                ),
+                box(
+                  withSpinner(plotlyOutput("Countries")),
+                  width = 12,
+                  title = ""
+                )
               )),
       
       
@@ -126,7 +106,7 @@ dashboardPage(
       
       tabItem(tabName = "Regression",
               
-              fluidPage(
+              fluidPage( style = "display:flex; justify-content:center;" ,
                 box(
                   pickerInput(
                     inputId = "Region",
@@ -224,7 +204,12 @@ dashboardPage(
                       withSpinner(verbatimTextOutput("Model2")),
                       width = 12,
                       title = "Model Summary"
-                    )
+                    ),
+                    
+                    box(withSpinner(plotOutput("residualPlots2")), width = 12, title = "Diagnostic Plots - Developed "),
+                    box(withSpinner(plotOutput("residualPlots3")), width = 12, title = "Diagnostic Plots - Underdeveloped")
+                    
+                    
                   ),
                   
                   
@@ -236,33 +221,34 @@ dashboardPage(
                       title = "Model Summary"
                     ),
                     
-                    box(withSpinner(plotOutput("residualPlots2")), width = 12, title = "Diagnostic Plots")
+                    box(withSpinner(plotOutput("residualPlots4")), width = 12, title = "Diagnostic Plots")
                     
                   ),
                   
                   
-                  tabPanel(
-                    "Best Model",
-                    box(
-                      withSpinner(verbatimTextOutput("Model4")),
-                      width = 12,
-                      title = "Model Summary"
-                    ),
+                  # tabPanel(
+                  #   "Best Model",
+                  #   box(
+                  #     withSpinner(verbatimTextOutput("Model4")),
+                  #     width = 12,
+                  #     title = "Model Summary"
+                  #   ),
                     
-                    box(withSpinner(plotOutput("residualPlots3")), width = 12, title = "Diagnostic Plots")
-                    
-                  ),
+                  #   box(withSpinner(plotOutput("residualPlots5")), width = 12, title = "Diagnostic Plots")
+                  #   
+                  # ),
                   
                   
                   
                   tabPanel("Conclusion",
                            box(withSpinner(
                              htmlOutput("Conclusion"),
-                           ), width = 6, ), ),
+                           ), width = 12, ), ),
                   
                 )
               ))
       
     )
   )
+)
 )

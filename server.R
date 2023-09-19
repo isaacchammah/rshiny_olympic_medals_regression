@@ -1,25 +1,22 @@
 shinyServer(function(input, output, session) {
-
-#Tab Motivation------------------------------------------------------------------------------------------------------
+  #Tab Motivation------------------------------------------------------------------------------------------------------
   
-  output$Motivation<- renderUI({
+  output$Motivation <- renderUI({
     HTML(
       paste(
-      
-        '<center> <h1> Olympic medals are important </h1> </center>',
-        '<p> Like it or not, every country, especially the United States, attaches great importance to winning medals, gold medals to be precise, at the Olympic Games, because it is a matter of national pride, symbol of national strength and a good way of commanding respect from others.<p/>',  
-       '<p> China has done an excellent job of cultivating athletes. Those who criticize Chinas way of selecting and training athletes have the ulterior motive of stirring up controversy and creating a negative image of China. Yang Hui, on China Daily website </p>'
+        "<center> <h1> <span style='color:brown'>Olympic medals are important</span>    </h1> </center>",
+        "<h3> Like it or not, every country, especially the United States, attaches great importance to winning medals, gold medals to be precise, at the Olympic Games, because it is a matter of national pride, symbol of national strength and a good way of commanding respect from others.<h3/>"
       )
     )
   })
   
   
-#Tab Data------------------------------------------------------------------------------------------------------
+  #Tab Data------------------------------------------------------------------------------------------------------
   
   
   output$slide = renderPlot({
     o_m_5 %>%
-      filter(position <= 3, year >= input$year1[1], year <= input$year1[2]) %>%
+      filter(position <= 4, year >= input$year1[1], year <= input$year1[2]) %>%
       ggplot(aes(
         x = year,
         y = position,
@@ -29,9 +26,20 @@ shinyServer(function(input, output, session) {
       geom_bump() +
       geom_point(size = 6) +
       coord_cartesian(xlim = input$year1)  +
-      scale_y_reverse(breaks = seq(1, 3, by = 1)) + geom_smooth()
+      scale_y_reverse(breaks = seq(1, 3, by = 1)) + geom_smooth() +
+      ggtitle("Historical total medal position") + 
+      theme(
+        plot.title = element_text(size = 18, face = "bold"),
+        plot.subtitle = element_text(size = 14, face = "bold"),
+        axis.text.x = element_text(angle = 90, vjust = 0.5),
+        panel.grid.major.x = element_blank()
+      )  
+      
     
   })
+  
+  
+o_m_5%>% filter(year=='2012')  %>% dplyr::select(country, position, total)
   
   
   graph_properties <- list(
@@ -49,7 +57,7 @@ shinyServer(function(input, output, session) {
                bordercolor = "transparent",
                font = font)
   
- 
+  
   output$mymap = renderPlotly({
     plot_geo(o_m_6, locationmode = "world",
              frame = ~ Year) %>%
@@ -64,59 +72,51 @@ shinyServer(function(input, output, session) {
         hoverinfo = 'text'
       )  %>%
       layout(geo = graph_properties,
-             title = "Countries/olympic gamerank \n1896 - 2020",
+             title = list(text = "Countries/olympic gamerank 1896 - 2020", size = 300),
              font = list(family = "DM Sans")) %>%
       config(displayModeBar = FALSE)
   })
   
+  medals
   
-
   output$myranking = renderPlotly({
-    top_10 <- medals %>%
-      
-      group_by(Country) %>%
-      
-      summarise(Total_Count = sum(Count)) %>%
-      
-      top_n(10, Total_Count) %>%
-      
-      arrange((Total_Count))
-    
-    ggplot(
-      medals %>% filter(Country %in% top_10$Country, Medal != "Total"),
-      
-      aes(
-        x = (Country),
-        
-        y = Count,
-        
-        fill = Medal
-        
-      )
-      
-    ) +
+    medals %>% arrange(desc(Total)) %>% head(30) %>%
+      ggplot(aes(x = Country,
+                 
+                 y = Total,
+                 
+                 fill = Medal)) +
       
       geom_col() +
       
       coord_flip() +
       
-      scale_fill_manual(values = c("gold1", "gray70", "gold4", "blue")) +
+      scale_fill_manual(values = c("gold4", "gold1", "gray70")) +
       
       ggtitle("Historical medal counts from Competitions") +
       
-      theme(plot.title = element_text(hjust = 0.5))
-    
+      theme(
+        plot.title = element_text(size = 18, face = "bold"),
+        plot.subtitle = element_text(size = 14, face = "bold"),
+        axis.text.x = element_text(angle = 90, vjust = 0.5),
+        panel.grid.major.x = element_blank()
+      )    
   })
   
   
-  output$Countries= renderPlotly({
+  
+  
+  
+  output$Countries = renderPlotly({
     hystoric %>%
       
       ggplot(aes(x = Year, y = Countries)) +
       
-      geom_point(size = 3, shape = 21, fill = "white") +
+      geom_point(size = 3,
+                 shape = 21,
+                 fill = "white") +
       
-      geom_line(color = "gold1", size = 1.5) + 
+      geom_line(color = "gold1", size = 1.5) +
       
       scale_color_manual(values = c("chocolate", "gold1")) +
       
@@ -132,15 +132,15 @@ shinyServer(function(input, output, session) {
       
       theme(
         plot.title = element_text(size = 18, face = "bold"),
-        plot.subtitle = element_text(size = 14, face = "bold"),  
+        plot.subtitle = element_text(size = 14, face = "bold"),
         axis.text.x = element_text(angle = 90, vjust = 0.5),
         panel.grid.major.x = element_blank()
       )
   })
   
   
-#Tab Regression------------------------------------------------------------------------------------------------------
- 
+  #Tab Regression------------------------------------------------------------------------------------------------------
+  
   
   observeEvent(input$Region, {
     updatePickerInput(
@@ -160,15 +160,18 @@ shinyServer(function(input, output, session) {
     }
   })
   
-
-  output$How<- renderUI({
+  
+  output$How <- renderUI({
     HTML(
       paste(
         '<h2> <center> Multiple linear regression (MLR)</center> </h2>',
         '<p> Multiple linear regression (MLR), also known simply as multiple regression, is a statistical technique that uses several explanatory variables to predict the outcome of a response variable. </p>',
-          '<p> The goal of multiple linear regression is to model the linear relationship between the explanatory (independent) variables and response (dependent) variables. In essence, multiple regression is the extension of ordinary least-squares (OLS) regression because it involves more than one explanatory variable.<p/>',
-        '<p>The objective of this app is to enable the user to build a multiple linear regression (MLR) model to predict which variables may influence a country to obtain more or fewer medals during the Olympic Games.</p>',
-          '<p>The provided dataset refers to the 2020 Summer Olympic Games.</p>',
+        '<p> The goal of multiple linear regression is to model the linear relationship between the explanatory (independent) variables and response (dependent) variables. In essence, multiple regression is the extension of ordinary least-squares (OLS) regression because it involves more than one explanatory variable.<p/>',
+        
+        '<p> The objective of this application is to allow users to go through the step-by-step process of multiple linear regression in a didactic and intuitive manner. However, it is necessary to have a background in statistics to handle it in the best possible way. It is a suitable application to be used in the classroom with the purpose of learning how to build an OLS model. </p>',
+        
+        '<p>It will enable the user to build a multiple linear regression (MLR) model to predict which variables may influence a country to obtain more or fewer medals during the Olympic Games.</p>',
+        '<p>The provided dataset refers to the 2020 Summer Olympic Games.</p>',
         '<p>Data was colected from 192 out of the 206 teams that participated in the games </p>',
         
         '<b>Tabs </b>',
@@ -179,16 +182,25 @@ shinyServer(function(input, output, session) {
         "<p style='color:brown'><b>Multicollinearity</b>: According to the selected independent variables, it shows the correlation matrix between them. It\'s important to note that the correlation should not be high; otherwise, the model won\'t be correct.</p>",
         "<p style='color:brown'><b>Plots</b>: The first graph displays the correlation matrix between all independent variables and the dependent variable. The second graph illustrates this relationship and shows if the same is linear.</p>",
         "<p style='color:brown'><b>Model</b>: MLR Model according to the chosen region and graphs to check for homoscedastic errors, normally distributed errors, and non-autocorrelated errors.</p>",
-        "<p style='color:brown'><b>Model: Developed x Underdeveloped Countries</b>: A model that compares a regression done only with developed countries and another done only with developing countries.</p>"
+        "<p style='color:brown'><b>Model: Developed x Underdeveloped Countries</b>: A model that compares a regression done only with developed countries and another done only with developing countries.</p>",
+        "<p style='color:brown'><b>Model Selection</b>: Model created using the  Aikake Information Criterion (AIC) is an estimator of prediction error. The AIC awards the lowest score to a model possessing the least loss of information (or that with most predictive power) while minimizing the number of predictor variables.</p>",
+        "<p style='color:brown'><b>Best Model</b>: Model that has already been created using the AIC model, it considers y=Total and x= all the available variables.</p>",
+        "<p style='color:brown'><b>Conclusion</b>: Brief discussion of the results found </p>"
+        
       )
     )
   })
   
-
+  
   output$Variables <-
     renderUI({
       HTML(
         paste(
+          "<b>  Country Status </b>",
+          "<ul>",
+          "<li style='color:red'> Developed: GDP/capta in the country is higher then $12,000 </li>",
+          "<li style='color:red'> Underdeveloped: GDP/capta in the country is lower then $12,000  </li>",
+          "</ul>",
           "<b>  Dependent variables </b>",
           "<ul>",
           "<li style='color:blue'> Gold: Gold medals </li>",
@@ -199,15 +211,11 @@ shinyServer(function(input, output, session) {
           "</ul>",
           "<b>  Independent variables </b>",
           "<ul>",
-          "<li style='color:green'>Country: Name of the country.</li>",
           "<li style='color:green'>Density (P/Km2): Population density measured in persons per square kilometer.</li>",
-          "<li style='color:green'>Abbreviation: Abbreviation or code representing the country.</li>",
           "<li style='color:green'>Agricultural Land (%): Percentage of land area used for agricultural purposes.</li>",
           "<li style='color:green'>Land Area (Km2): Total land area of the country in square kilometers divided by 10^6.</li>",
           "<li style='color:green'>Armed Forces Size: Size of the armed forces in the country.</li>",
           "<li style='color:green'>Birth Rate: Number of births per 1,000 population per year.</li>",
-          "<li style='color:green'>Calling Code: International calling code for the country.</li>",
-          "<li style='color:green'>Capital/Major City: Name of the capital or major city.</li>",
           "<li style='color:green'>CO2 Emissions: Carbon dioxide emissions in tons.</li>",
           "<li style='color:green'>CPI: Consumer Price Index, a measure of inflation and purchasing power.</li>",
           "<li style='color:green'>CPI Change (%): Percentage change in the Consumer Price Index compared to the previous year.</li>",
@@ -223,7 +231,6 @@ shinyServer(function(input, output, session) {
           "<li style='color:green'>Life Expectancy: Average number of years a newborn is expected to live.</li>",
           "<li style='color:green'>Maternal Mortality Ratio: Number of maternal deaths per 100,000 live births.</li>",
           "<li style='color:green'>Minimum Wage: Minimum wage level in local currency.</li>",
-          "<li style='color:green'>Official Language: Official language(s) spoken in the country.</li>",
           "<li style='color:green'>Out of Pocket Health Expenditure (%): Percentage of total health expenditure paid out-of-pocket by individuals.</li>",
           "<li style='color:green'>Physicians per Thousand: Number of physicians per thousand people.</li>",
           "<li style='color:green'>Population: Total population of the country divided by 10^6.</li>",
@@ -233,14 +240,14 @@ shinyServer(function(input, output, session) {
           "<li style='color:green'>Unemployment Rate: Percentage of the labor force that is unemployed.</li>",
           "<li style='color:green'>Urban Population: Percentage of the population living in urban areas.</li>",
           "<li style='color:green'>Country Status: If the GDP/capta was lower then $12,000 the country was considered Underdeveloped, else Developed </li>",
-          "<li style='color:red'>All independent variables can also be chosen in their log form</li>",
+          "<li style='color:gray'>All independent variables can also be chosen in their log form</li>",
           "</ul>",
           collapse = "\n"
         )
       )
     })
   
-#choose type of data to be displayed 
+  #choose type of data to be displayed
   InputDataset <- reactive({
     region <- input$Region
     
@@ -254,8 +261,8 @@ shinyServer(function(input, output, session) {
   })
   
   
-#slider for data visualization    
-#data visualization 
+  #slider for data visualization
+  #data visualization
   
   output$Data <- renderDT({
     datatable(InputDataset(),
@@ -266,14 +273,14 @@ shinyServer(function(input, output, session) {
   })
   
   
-#summarizing the data  
-output$Summ_old <- renderPrint(skim(InputDataset()))
+  #summarizing the data
+  output$Summ_old <- renderPrint(skim(InputDataset()))
   
   
-#Multicolliniarity - Correlation matrix between x variables     
+  #Multicolliniarity - Correlation matrix between x variables
   output$Multi <- renderPlot({
     corrplot(
-      cor(df %>% dplyr::select(input$Corr), use = "complete.obs"),
+      cor(InputDataset() %>% dplyr::select(input$Corr), use = "complete.obs"),
       method = 'number',
       order = 'AOE',
       type = 'lower'
@@ -281,10 +288,13 @@ output$Summ_old <- renderPrint(skim(InputDataset()))
   })
   
   
-#Correlation matrix between x variables and y variable 
+  #Correlation matrix between x variables and y variable
   output$Corr <- renderPlot({
     corrplot(
-      cor(df %>% dplyr::select(input$SelectY, input$Corr), use = "complete.obs"),
+      cor(
+        InputDataset() %>% dplyr::select(input$SelectY, input$Corr),
+        use = "complete.obs"
+      ),
       method = 'ellipse',
       order = 'AOE',
       type = 'lower'
@@ -292,11 +302,11 @@ output$Summ_old <- renderPrint(skim(InputDataset()))
   })
   
   
-#scatterplot between variables  
+  #scatterplot between variables
   output$Plots <- renderPlot ({
     ggpairs(
-      df,
-      columns = c(input$Corr,input$SelectY ),
+      InputDataset(),
+      columns = c(input$Corr, input$SelectY),
       mapping = ggplot2::aes(color = Country_status),
       lower = list(continuous = 'points'),
       axisLabels = 'none',
@@ -305,9 +315,9 @@ output$Summ_old <- renderPrint(skim(InputDataset()))
     )
   })
   
-
   
-#Code section for Linear Regression-----------------------------------------------------------------------------
+  
+  #Code section for Linear Regression-----------------------------------------------------------------------------
   
   f <- reactive({
     as.formula(paste(input$SelectY, "~", paste(input$Corr, collapse = "+")))
@@ -326,14 +336,14 @@ output$Summ_old <- renderPrint(skim(InputDataset()))
     
     lm(f(), data = df_filtered)
   })
-
-#General Model    
+  
+  #General Model
   output$Model <-
     renderPrint(
       stargazer(
         Linear_Model(),
         type = 'text',
-        digits = 2,
+        digits = 4,
         title = 'All',
         style = 'qje',
         out = 'Lm_1.doc'
@@ -341,16 +351,16 @@ output$Summ_old <- renderPrint(skim(InputDataset()))
     )
   
   
-#General Model residual plots
+  #General Model residual plots
   
   output$residualPlots <- renderPlot({
-    par(mfrow = c(2, 2)) 
+    par(mfrow = c(2, 2))
     plot(Linear_Model())
     par(mfrow = c(1, 1))
     
   })
   
-#Develoed X Underdeveloped Model    
+  #Developed X Underdeveloped Model
   Linear_Model2 <- reactive({
     region <- input$Region
     
@@ -378,14 +388,36 @@ output$Summ_old <- renderPrint(skim(InputDataset()))
         Linear_Model2(),
         Linear_Model3() ,
         type = 'text',
-        digits = 2,
-        title = paste('Developed', '          ', 'Underdeveloped'),
+        digits = 4,
+        title = paste('Developed    Underdeveloped'),
         style = 'qje',
         out = 'Lm_1.doc'
       )
     )
   
-#AIC model
+  
+  #General Model residual plots
+  
+  output$residualPlots2 <- renderPlot({
+    par(mfrow = c(2, 2))
+    plot(Linear_Model2())
+    par(mfrow = c(1, 1))
+    
+  })
+  
+  
+  #General Model residual plots
+  
+  output$residualPlots3 <- renderPlot({
+    par(mfrow = c(2, 2))
+    plot(Linear_Model3())
+    par(mfrow = c(1, 1))
+    
+  })
+  
+  
+  
+  #AIC model
   
   Linear_Model4 <- reactive({
     region <- input$Region
@@ -403,66 +435,118 @@ output$Summ_old <- renderPrint(skim(InputDataset()))
   
   output$Model3 <-
     renderPrint(
-      stargazer(stepAIC(
-        Linear_Model4()
-        ),
+      stargazer(
+        stepAIC(Linear_Model4()),
         type = 'text',
-        digits = 2,
+        digits = 4,
         title = 'All',
         style = 'qje',
         out = 'Lm_1.doc'
       )
     )
-#AIC residual plot  
-  output$residualPlots2 <- renderPlot({
-    par(mfrow = c(2, 2)) 
+  #AIC residual plot
+  output$residualPlots4 <- renderPlot({
+    par(mfrow = c(2, 2))
     plot(Linear_Model4())
     par(mfrow = c(1, 1))
     
   })
   
   
-
   
-  best_model= (lm(Total ~ Density_p_km2 + Land_area_km2 + Armed_forces_size + Birth_rate +
-                    Co2_emissions + Fertility_rate + Gasoline_price + Infant_mortality +
-                    Life_expectancy + Maternal_mortality_ratio + Population +
-                    Population_labor_force_participation_percent + Unemployment_rate +
-                    Urban_population + Gdp_capta + Country_status + log_Density_p_km2 +
-                    log_Agricultural_land_percent + log_Birth_rate + log_Fertility_rate +
-                    log_Gasoline_price + log_Gdp + log_Life_expectancy + log_Maternal_mortality_ratio +
-                    log_Physicians_per_thousand + log_Population + log_Urban_population +
-                    log_Gdp_capta, data = df ))
-    
+  
+  best_model = (
+    lm(
+      Total ~ Density_p_km2 + Land_area_km2 + Armed_forces_size + Co2_emissions +
+        Gasoline_price + Infant_mortality + Life_expectancy + Maternal_mortality_ratio +
+        Population + Population_labor_force_participation_percent +
+        Unemployment_rate + Urban_population + Gdp_capta + log_Density_p_km2 +
+        log_Agricultural_land_percent + log_Birth_rate + log_Fertility_rate +
+        log_Gasoline_price + log_Gdp + log_Infant_mortality + log_Maternal_mortality_ratio +
+        log_Out_of_pocket_health_expenditure_percent + log_Physicians_per_thousand +
+        log_Population + log_Urban_population + log_Gdp_capta,
+      data = df
+    )
+  )
+  
   
   output$Model4 <-
     renderPrint(
-      summary(stepAIC(
-      best_model
-      ),
-      type = 'text',
-      digits = 2,
-      title = 'All',
-      style = 'qje',
-      out = 'Lm_1.doc'
+      summary(
+        stepAIC(best_model),
+        type = 'text',
+        digits = 4,
+        title = 'All',
+        style = 'qje',
+        out = 'Lm_1.doc'
       )
     )
-  #AIC residual plot  
-  output$residualPlots3 <- renderPlot({
-    par(mfrow = c(2, 2)) 
+  #AIC residual plot
+  output$residualPlots5 <- renderPlot({
+    par(mfrow = c(2, 2))
     plot(best_model)
     par(mfrow = c(1, 1))
     
   })
   
-
-
+  #Tab Conclusion------------------------------------------------------------------------------------------------------
+  
+  output$Conclusion <- renderUI({
+    HTML(
+      paste0(
+        "<p> A very simple model with a high R^2 would be to use the variables: Land_area_km2, Gdp, Population, and log_Infant_Mortality.
+        However, this model does not satisfy the condition that the mean residual value for every fitted value region is
+        close to 0, as the red line on the residual vs. fitted plot does not remain at zero.</p>",
+        "</br>",
+        
+        "<p>Therefore, the best model selected to predict the total amount of medals won by
+        all countries was the one created with the AIC estimator. The assumptions for multiple linear
+        regression were considerably satisfied, except for multicollinearity, which was slightly present in
+        the model.</p>",
+        
+        "<p>",
+        "<strong>Best Model:</strong> ",
+        "Total = 11.3310 ",
+        "+ <span style='color:green'>1.8687 * Land_area_km2</span> ",
+        "+ <span style='color:green'>0.00001 * Armed_forces_size</span> ",
+        "+ <span style='color:green'>0.00001 * Co2_emissions</span> ",
+        "- <span style='color:red'>0.0580 * Population</span> ",
+        "+ <span style='color:green'>1.4158 * log_Agricultural_land_percent</span> ",
+        "- <span style='color:red'>14.6936 * log_Birth_rate</span> ",
+        "+ <span style='color:green'>14.0683 * log_Fertility_rate</span> ",
+        "+ <span style='color:green'>5.2804 * log_Gasoline_price</span> ",
+        "+ <span style='color:green'>2.0094 * log_Gdp</span> ",
+        "- <span style='color:red'>1.5553 * log_Out_of_pocket_health_expenditure_percent</span>",
+        "</p>",
+        "<p>",
+        "Interpretation:",
+        "</p>",
+        '<p> 78,65% of the variability of the total number of medals won by all countries in the 2020 summer olympics is explained by the 10 variables listed bellow </p>',
+        "<ol>",
+        "<li>Land_area_km2: For each million square-kilometer <span style='color:green'>increase</span> in land area, there is an average <span style='color:green'>increase</span> of 1.8687 medals won, keeping everything else constant</li>",
+        "<li>Armed_forces_size: For every one unit <span style='color:green'>increase</span> in the size of the armed forces, there is an average <span style='color:green'>increase</span> of 0.00001 units in medals won, keeping everything else constant</li>",
+        "<li>Co2_emissions: With every one ton <span style='color:green'>increase</span> in carbon dioxide emissions, there is an average <span style='color:green'>increase</span> of 0.00001 medals won, keeping everything else constant</li>",
+        "<li>Population: For each <span style='color:green'>increase</span>  in one million of the population, there is an average <span style='color:red'>decrease</span> of 0.0580 medals won, keeping everything else constant</li>",
+        
+        "<li>log_Agricultural_land_percent: An <span style='color:green'>increase</span> of one percent of the percentage of land used for agricultural purposes results in an average <span style='color:green'>increase</span> of 0.014158 medals won, keeping everything else constant</li>",
+        
+        "<li>log_Birth_rate: A one percent <span style='color:green'>increase</span> of the birth rate is associated with an average <span style='color:red'>decrease</span> of 0.146936 medals won, keeping everything else constant",
+        
+        "<li>log_Fertility_rate: A one percent <span style='color:green'>increase</span> of the fertility rate leads to an average <span style='color:green'>increase</span> of 0.140683 medals won, keeping everything else constant </li>",
+        
+        "<li>log_Gasoline_price: With each one percent <span style='color:green'>increase</span> in the natural logarithm of the gasoline price, there is an average <span style='color:green'>increase</span> of 0.052804 medals won, keeping everything else constant</li>",
+        
+        "<li>log_Gdp: A one percent <span style='color:green'>increase</span> of the GDP results results in an average <span style='color:green'>increase</span> of 0.020094 medals won, keeping everything else constant </li>",
+        
+        "<li>log_Out_of_pocket_health_expenditure_percent: An <span style='color:green'>increase</span> of one percent in the of the percentage of out-of-pocket health expenditure is associated with an average <span style='color:red'>decrease</span> of 0.015553 medals won, keeping everything else constant</li>",
+        "</ol>"
+      )
+    )
+  })
+  
+  
+  
+  
+  
+  
 })
-
-
-
-
-
-
-
-

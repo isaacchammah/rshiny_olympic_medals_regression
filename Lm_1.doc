@@ -1,33 +1,20 @@
 
-Developed Underdeveloped
-=========================================================================
-                                                  NA                     
-                                      (1)                   (2)          
--------------------------------------------------------------------------
-Land_area_km2                        0.44                 3.51***        
-                                    (0.85)                 (0.24)        
-                                                                         
-Gdp                                0.0000***              -0.0000        
-                                   (0.0000)               (0.0000)       
-                                                                         
-Gdp_capta                           0.0001                 0.0000        
-                                   (0.0001)               (0.0001)       
-                                                                         
-log_Maternal_mortality_ratio         -0.18                -1.25***       
-                                    (2.08)                 (0.31)        
-                                                                         
-log_Population                      3.76***                 0.09         
-                                    (1.12)                 (0.22)        
-                                                                         
-Constant                             -1.74                5.83***        
-                                    (7.41)                 (1.89)        
-                                                                         
-N                                     56                    123          
-R2                                   0.82                   0.77         
-Adjusted R2                          0.81                   0.76         
-Residual Std. Error             9.99 (df = 50)        3.54 (df = 117)    
-F Statistic                  47.07*** (df = 5; 50) 78.69*** (df = 5; 117)
-=========================================================================
-Notes:                             ***Significant at the 1 percent level.
-                                    **Significant at the 5 percent level.
-                                    *Significant at the 10 percent level.
+All
+===============================================================
+                                           NA                  
+---------------------------------------------------------------
+Individual_athletes_male               0.0004***               
+                                       (0.00003)               
+                                                               
+Constant                               -0.0052***              
+                                        (0.0016)               
+                                                               
+N                                          78                  
+R2                                       0.7459                
+Adjusted R2                              0.7425                
+Residual Std. Error                 0.0097 (df = 76)           
+F Statistic                     223.0549*** (df = 1; 76)       
+===============================================================
+Notes:                   ***Significant at the 1 percent level.
+                          **Significant at the 5 percent level.
+                          *Significant at the 10 percent level.
