@@ -1,20 +1,29 @@
 
 All
-===============================================================
-                                           NA                  
----------------------------------------------------------------
-Individual_athletes_male               0.0004***               
-                                       (0.00003)               
-                                                               
-Constant                               -0.0052***              
-                                        (0.0016)               
-                                                               
-N                                          78                  
-R2                                       0.7459                
-Adjusted R2                              0.7425                
-Residual Std. Error                 0.0097 (df = 76)           
-F Statistic                     223.0549*** (df = 1; 76)       
-===============================================================
-Notes:                   ***Significant at the 1 percent level.
-                          **Significant at the 5 percent level.
-                          *Significant at the 10 percent level.
+===========================================================
+                                       NA                  
+-----------------------------------------------------------
+Individual_athletes                0.1988***               
+                                    (0.0277)               
+                                                           
+Team_athletes                       0.1989*                
+                                    (0.1137)               
+                                                           
+Perc_male_individual                 0.0099                
+                                    (0.0304)               
+                                                           
+Perc_male_team                     -0.0461***              
+                                    (0.0129)               
+                                                           
+Constant                            -1.9264                
+                                    (1.8615)               
+                                                           
+N                                     191                  
+R2                                   0.8432                
+Adjusted R2                          0.8398                
+Residual Std. Error            5.8012 (df = 186)           
+F Statistic                249.9716*** (df = 4; 186)       
+===========================================================
+Notes:               ***Significant at the 1 percent level.
+                      **Significant at the 5 percent level.
+                      *Significant at the 10 percent level.

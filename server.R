@@ -5,7 +5,7 @@ shinyServer(function(input, output, session) {
     HTML(
       paste(
         "<center> <h1> <span style='color:brown'>Olympic medals are important</span>    </h1> </center>",
-        "<h3> Like it or not, every country, especially the United States, attaches great importance to winning medals, gold medals to be precise, at the Olympic Games, because it is a matter of national pride, symbol of national strength and a good way of commanding respect from others.<h3/>"
+        "<h5> Like it or not, every country, especially the United States, attaches great importance to winning medals, gold medals to be precise, at the Olympic Games, because it is a matter of national pride, symbol of national strength and a good way of commanding respect from others.<h5/>"
       )
     )
   })
@@ -13,10 +13,10 @@ shinyServer(function(input, output, session) {
   
   #Tab Data------------------------------------------------------------------------------------------------------
   
-  
+
   output$slide = renderPlot({
     o_m_5 %>%
-      filter(position <= 4, year >= input$year1[1], year <= input$year1[2]) %>%
+      filter(position <= 4, year >= input$year1[1], year <= input$year1[2], year %% 4 == 0) %>%
       ggplot(aes(
         x = year,
         y = position,
@@ -26,7 +26,9 @@ shinyServer(function(input, output, session) {
       geom_bump() +
       geom_point(size = 6) +
       coord_cartesian(xlim = input$year1)  +
-      scale_y_reverse(breaks = seq(1, 3, by = 1)) + geom_smooth() +
+      scale_y_reverse(breaks = seq(1, 4, by = 1)) +
+      scale_x_continuous(breaks = seq(input$year1[1], input$year1[2], by = 4)) +
+      geom_smooth() +
       ggtitle("Historical total medal position") + 
       theme(
         plot.title = element_text(size = 18, face = "bold"),
@@ -34,8 +36,6 @@ shinyServer(function(input, output, session) {
         axis.text.x = element_text(angle = 90, vjust = 0.5),
         panel.grid.major.x = element_blank()
       )  
-      
-    
   })
   
   
@@ -184,7 +184,6 @@ o_m_5%>% filter(year=='2012')  %>% dplyr::select(country, position, total)
         "<p style='color:brown'><b>Model</b>: MLR Model according to the chosen region and graphs to check for homoscedastic errors, normally distributed errors, and non-autocorrelated errors.</p>",
         "<p style='color:brown'><b>Model: Developed x Underdeveloped Countries</b>: A model that compares a regression done only with developed countries and another done only with developing countries.</p>",
         "<p style='color:brown'><b>Model Selection</b>: Model created using the  Aikake Information Criterion (AIC) is an estimator of prediction error. The AIC awards the lowest score to a model possessing the least loss of information (or that with most predictive power) while minimizing the number of predictor variables.</p>",
-        "<p style='color:brown'><b>Best Model</b>: Model that has already been created using the AIC model, it considers y=Total and x= all the available variables.</p>",
         "<p style='color:brown'><b>Conclusion</b>: Brief discussion of the results found </p>"
         
       )
@@ -264,6 +263,17 @@ o_m_5%>% filter(year=='2012')  %>% dplyr::select(country, position, total)
   #slider for data visualization
   #data visualization
   
+  
+  output$Datatext <- renderUI({
+    HTML(
+      paste(
+        "<p> Data table for the selected region </p>"
+        
+      ))   
+  }) 
+  
+  
+  
   output$Data <- renderDT({
     datatable(InputDataset(),
               options = list(scrollX = TRUE,
@@ -273,9 +283,31 @@ o_m_5%>% filter(year=='2012')  %>% dplyr::select(country, position, total)
   })
   
   
+  
+  
+  output$Summtext <- renderUI({
+    HTML(
+      paste(
+        "<p> Data summary for the selected region</p>"
+        
+      ))   
+  }) 
+  
+  
   #summarizing the data
   output$Summ_old <- renderPrint(skim(InputDataset()))
   
+  skim(df)
+  
+  
+  output$Multitext <- renderUI({
+    HTML(
+      paste(
+        "<p> Correlation matrix between the chosen X variables </p>"
+
+      ))   
+  }) 
+        
   
   #Multicolliniarity - Correlation matrix between x variables
   output$Multi <- renderPlot({
@@ -286,6 +318,15 @@ o_m_5%>% filter(year=='2012')  %>% dplyr::select(country, position, total)
       type = 'lower'
     )
   })
+  
+  
+  output$Corrtext <- renderUI({
+    HTML(
+      paste(
+        "<p> Correlation matrix between chosen x variables and y variable </p>"
+        
+      ))   
+  }) 
   
   
   #Correlation matrix between x variables and y variable
@@ -300,6 +341,16 @@ o_m_5%>% filter(year=='2012')  %>% dplyr::select(country, position, total)
       type = 'lower'
     )
   })
+  
+  
+  output$Plotstext <- renderUI({
+    HTML(
+      paste(
+        "<p> Scatterplot graphs showing the relashionship of the chosen variables  </p>",
+        "<p> If all regions are selected Red represents Developed countries and Blues represents Undeveloped countries</p>"
+        
+      ))   
+  }) 
   
   
   #scatterplot between variables
@@ -337,6 +388,16 @@ o_m_5%>% filter(year=='2012')  %>% dplyr::select(country, position, total)
     lm(f(), data = df_filtered)
   })
   
+  
+  output$Modeltext <- renderUI({
+    HTML(
+      paste(
+        "<p> Multiple linear regression between the chosen region and variables</p>"
+        
+      ))   
+  }) 
+  
+
   #General Model
   output$Model <-
     renderPrint(
@@ -351,6 +412,14 @@ o_m_5%>% filter(year=='2012')  %>% dplyr::select(country, position, total)
     )
   
   
+  output$Plottext <- renderUI({
+    HTML(
+      paste(
+        "<p> Residual plots from the model created</p>"
+      ))   
+  }) 
+  
+  
   #General Model residual plots
   
   output$residualPlots <- renderPlot({
@@ -359,6 +428,18 @@ o_m_5%>% filter(year=='2012')  %>% dplyr::select(country, position, total)
     par(mfrow = c(1, 1))
     
   })
+  
+  output$Developedtext <- renderUI({
+    HTML(
+      paste(
+        "<p> Residual plots from the model created comparing Developed and Undeveloped countries</p>",
+        "<p> This only functions if the option All regions is selected </p>"
+        
+      ))   
+  }) 
+  
+  
+  
   
   #Developed X Underdeveloped Model
   Linear_Model2 <- reactive({
@@ -382,6 +463,17 @@ o_m_5%>% filter(year=='2012')  %>% dplyr::select(country, position, total)
     lm(f(), data = df_filtered3)
   })
   
+  
+  output$Developedtext <- renderUI({
+    HTML(
+      paste(
+        "<p> Residual plots from the model created comparing Developed and Undeveloped countries</p>",
+        "<p> This only functions if the option All regions is selected </p>"
+        
+      ))   
+  }) 
+  
+  
   output$Model2 <-
     renderPrint(
       stargazer(
@@ -396,7 +488,18 @@ o_m_5%>% filter(year=='2012')  %>% dplyr::select(country, position, total)
     )
   
   
-  #General Model residual plots
+  
+  output$Developedplottext <- renderUI({
+    HTML(
+      paste(
+        "<p> Residual plots from the model created comparing Developed and Undeveloped countries</p>",
+        "<p> This only functions if the option All regions is selected </p>"
+        
+      ))   
+  }) 
+  
+  
+  #General Model residual plots for developed
   
   output$residualPlots2 <- renderPlot({
     par(mfrow = c(2, 2))
@@ -405,8 +508,19 @@ o_m_5%>% filter(year=='2012')  %>% dplyr::select(country, position, total)
     
   })
   
+  output$Underdevelopedplottext <- renderUI({
+    HTML(
+      paste(
+        "<p> Residual plots from the model created comparing Developed and Undeveloped countries</p>",
+        "<p> This only functions if the option All regions is selected </p>"
+        
+      ))   
+  }) 
   
-  #General Model residual plots
+  
+  
+  
+  #General Model residual plotsfor underdeveloped
   
   output$residualPlots3 <- renderPlot({
     par(mfrow = c(2, 2))
@@ -433,6 +547,17 @@ o_m_5%>% filter(year=='2012')  %>% dplyr::select(country, position, total)
   })
   
   
+  
+  output$AICtext <- renderUI({
+    HTML(
+      paste(
+        "<p> Model using AIC</p>"
+        
+      ))   
+  }) 
+  
+  
+  
   output$Model3 <-
     renderPrint(
       stargazer(
@@ -444,6 +569,18 @@ o_m_5%>% filter(year=='2012')  %>% dplyr::select(country, position, total)
         out = 'Lm_1.doc'
       )
     )
+  
+  
+  output$AICplottext <- renderUI({
+    HTML(
+      paste(
+        "<p> Model using AIC</p>"
+        
+      ))   
+  }) 
+  
+  
+  
   #AIC residual plot
   output$residualPlots4 <- renderPlot({
     par(mfrow = c(2, 2))
@@ -451,8 +588,6 @@ o_m_5%>% filter(year=='2012')  %>% dplyr::select(country, position, total)
     par(mfrow = c(1, 1))
     
   })
-  
-  
   
   
   best_model = (

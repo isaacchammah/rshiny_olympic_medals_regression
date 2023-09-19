@@ -10,7 +10,6 @@ library(leaflet)
 library (RColorBrewer)
 library(tidygeocoder)
 library(readxl)
-library(maps)
 library(ggbump)
 library(corrplot)
 library(shinyWidgets)
@@ -29,7 +28,6 @@ library(lme4)
 library(sjlabelled)
 library(broom)
 library(sf)
-library(maps)
 library(plotly)
 library(flextable)
 library(stargazer)
@@ -43,20 +41,8 @@ library(data.table)
 library(forcats)
 library(rsconnect)
 
-
-
-
-
-# o_m <-
-#   read_csv(
-#     "C:/Users/danie/OneDrive/Desktop/DATA SCIENCE/R/Shiny/Olympics/Olympics/Olympic_Games_Medal_Tally.csv"
-#   )
-
-
 o_m <-
-  read_csv(
-    "Olympic_Games_Medal_Tally.csv"
-  )
+  read_csv("Olympic_Games_Medal_Tally.csv")
 
 
 
@@ -70,19 +56,8 @@ o_m_3 = o_m_2 %>% mutate(rank = total / total_games_medal)
 
 o_m_2020 = o_m_3 %>% filter(year == '2020')
 
-
-# countries <-
-#   read_csv(
-#     "C:/Users/danie/OneDrive/Desktop/DATA SCIENCE/R/Shiny/Olympics/Olympics/world-data-2023.csv"
-#   )
-
 countries <-
-  read_csv(
-    "world-data-2023.csv"
-  )
-
-
-
+  read_csv("world-data-2023.csv")
 
 
 o_m_2020 = o_m_2020 %>%  rename(Country = country)
@@ -91,17 +66,15 @@ o_m_2020 = o_m_2020 %>%  rename(Country = country)
 
 df = inner_join(o_m_2020, countries, by = 'Country')
 
+
+
+
 paises = as.data.frame(unique(o_m_3$country))
 
-# average_latitude_longitude_countries <-
-#   read_excel(
-#     "C:/Users/danie/OneDrive/Desktop/DATA SCIENCE/R/Shiny/Olympics/Olympics/average-latitude-longitude-countries.xlsx"
-#   )
+
 
 average_latitude_longitude_countries <-
-read_excel(
-  "average-latitude-longitude-countries.xlsx"
-)
+  read_excel("average-latitude-longitude-countries.xlsx")
 
 
 
@@ -120,18 +93,10 @@ unique(o_m_4$year)
 
 o_m_4 %>% group_by(year) %>% summarise(sum(total))
 
-o_m_5 = (o_m_4 %>% group_by(year) %>% mutate(position = rank(-rank)))
+o_m_5 = (o_m_4 %>% group_by(year) %>% mutate(position = trunc(rank(-rank))))
 
-o_m_5 %>% filter(position <= 3) %>%
-  ggplot(aes(x = year, y = position, color = country)) +
-  geom_bump() +
-  geom_point(size = 6)
+o_m_5$position = trunc(o_m_5$position)
 
-
-# athlete <-
-#   read_csv(
-#     "C:/Users/danie/OneDrive/Desktop/DATA SCIENCE/R/Shiny/Olympics/Olympics/Olympic_Athlete_Event_Results.csv"
-#   )
 
 
 athlete <-
@@ -146,10 +111,10 @@ athlete <-
 individual = athlete %>% filter(edition == "2020 Summer Olympics", isTeamSport=='FALSE') %>% 
   dplyr::group_by (Country) %>% dplyr::summarise(Individual_Athletes = n_distinct(athlete_id))
 
-individual
+
 
 individual_male =
- athlete %>% filter(edition == "2020 Summer Olympics", isTeamSport=='FALSE', `Sex` =='Male') %>% 
+  athlete %>% filter(edition == "2020 Summer Olympics", isTeamSport=='FALSE', `Sex` =='Male') %>% 
   dplyr::group_by (Country) %>% dplyr::summarise(Individual_Athletes_Male = n_distinct(athlete_id))
 
 
@@ -161,9 +126,9 @@ team_male =athlete %>% filter(edition == "2020 Summer Olympics", isTeamSport=='T
 
 
 
-athletes = inner_join(individual, team, by="Country")
-athletes = inner_join(athletes,individual_male ,by="Country")
-athletes = inner_join(athletes,team_male,by="Country")
+athletes = full_join(individual, team, by="Country")
+athletes = full_join(athletes,individual_male ,by="Country")
+athletes = full_join(athletes,team_male,by="Country")
 
 athletes = athletes %>% rename (Team_Athletes = Team_Athletes.x,
                                 Team_Athletes_Male = Team_Athletes.y) %>%
@@ -172,6 +137,7 @@ athletes = athletes %>% rename (Team_Athletes = Team_Athletes.x,
     Perc_Male_Team = (Team_Athletes_Male / Team_Athletes) * 100
   ) 
 
+athletes <- athletes%>% replace(is.na(.), 0)
 
 
 o_m_5 %>%
@@ -180,20 +146,8 @@ o_m_5 %>%
   arrange(desc(TOTAL))
 
 
-
-# codes <-
-#   read_excel(
-#     "C:/Users/danie/OneDrive/Desktop/DATA SCIENCE/R/Shiny/Olympics/Olympics/codes.xlsx"
-#   )
-
-
 codes <-
-  read_excel(
-    "codes.xlsx"
-  )
-
-
-
+  read_excel("codes.xlsx")
 
 
 o_m_6 = inner_join(o_m_5, codes, by = 'country')
@@ -201,7 +155,7 @@ o_m_6 = inner_join(o_m_5, codes, by = 'country')
 o_m_6 = o_m_6  %>% mutate(hover = paste0(country, "\n", position))
 
 
-df = inner_join(df, athletes,by ='Country')
+df = inner_join(df, athletes, by = 'Country')
 
 df = df %>% mutate_at(
   c(
@@ -216,11 +170,7 @@ df = df %>% mutate_at(
   as.numeric
 )
 
-names(df)
-sum(is.na(df))
-dim(df)
-
-rows_with_na <- df [!complete.cases(df), ]
+rows_with_na <- df [!complete.cases(df),]
 print (rows_with_na)
 
 names(df)
@@ -255,8 +205,6 @@ df[df$Country == "Palestine", "Country_status"] <- "Underdeveloped"
 names(o_m_6) = str_to_title(names(o_m_6))
 
 
-
-
 medals = o_m_6 %>%
   dplyr::select(Country, Gold, Silver, Bronze, Total) %>%
   group_by(Country) %>%
@@ -270,8 +218,8 @@ medals = o_m_6 %>%
     cols = c(Gold, Silver, Bronze),
     names_to = "Medal",
     values_to = "Count"
-  ) %>% 
-  filter(Medal!='Total') 
+  ) %>%
+  filter(Medal != 'Total')
 
 
 xnames =  df %>%  dplyr::select(
@@ -291,7 +239,6 @@ xnames =  df %>%  dplyr::select(
   -Team_athletes_male
 )
 
-names(df)
 
 ynames =  df %>%  dplyr::select(Rank, Gold, Silver, Bronze, Total)
 
@@ -325,29 +272,11 @@ xnames3 =  df %>%  dplyr::select(
 )
 
 
-# sports <-
-#   read_csv(
-#     "C:/Users/danie/OneDrive/Desktop/DATA SCIENCE/R/Shiny/Olympics/Olympics/Olympic_Athlete_Event_Results.csv"
-#   )
-
 sports <-
-  read_csv(
-    "Olympic_Athlete_Event_Results.csv"
-  )
+  read_csv("Olympic_Athlete_Event_Results.csv")
 
 
 hystoric = sports %>% mutate (Summer =  gsub("[[:digit:]]", "", edition),
                               Year = parse_number(edition)) %>%
   filter (Summer == ' Summer Olympics')  %>%  group_by(Year) %>% summarise(Countries =
                                                                              n_distinct(country_noc))
-
-
-
-
-
-
-
-#ano de 2012??
-# tirar a virgula do slider
-#medalhas - filtro
-#trocar
