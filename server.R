@@ -4,8 +4,13 @@ shinyServer(function(input, output, session) {
   output$Motivation <- renderUI({
     HTML(
       paste(
-        "<center> <h1> <span style='color:brown'>Olympic medals are important</span>    </h1> </center>",
-        "<h5> Like it or not, every country, especially the United States, attaches great importance to winning medals, gold medals to be precise, at the Olympic Games, because it is a matter of national pride, symbol of national strength and a good way of commanding respect from others.<h5/>"
+        "<center><h2><span style='color:brown'>The Significance of Olympic Medals</span></h2></center>",
+        "<h5>Whether we like it or not, winning medals, especially gold medals, at the Olympic Games holds immense importance for every country, including the United States. It represents national pride, symbolizes strength, and commands respect from others.</h5>",
+        "<p>This app consists of two sections:</p>",
+        "<ol>",
+        "<li>Data: Four graphs display information on the modern Olympic Summer Games.</li>",
+        "<li>Regression: Users can create their own linear regression model to understand which variables influenced a country's medal count in the 2020 Summer Olympics.</li>",
+        "</ol>"
       )
     )
   })
@@ -13,10 +18,13 @@ shinyServer(function(input, output, session) {
   
   #Tab Data------------------------------------------------------------------------------------------------------
   
-
+  
   output$slide = renderPlot({
     o_m_5 %>%
-      filter(position <= 4, year >= input$year1[1], year <= input$year1[2], year %% 4 == 0) %>%
+      filter(position <= 4,
+             year >= input$year1[1],
+             year <= input$year1[2],
+             year %% 4 == 0) %>%
       ggplot(aes(
         x = year,
         y = position,
@@ -29,17 +37,17 @@ shinyServer(function(input, output, session) {
       scale_y_reverse(breaks = seq(1, 4, by = 1)) +
       scale_x_continuous(breaks = seq(input$year1[1], input$year1[2], by = 4)) +
       geom_smooth() +
-      ggtitle("Historical total medal position") + 
       theme(
         plot.title = element_text(size = 18, face = "bold"),
         plot.subtitle = element_text(size = 14, face = "bold"),
         axis.text.x = element_text(angle = 90, vjust = 0.5),
         panel.grid.major.x = element_blank()
-      )  
+      )  +
+      labs (x = 'Year' , y = 'Position', title = "Top 4 historical total medal position")
   })
   
   
-o_m_5%>% filter(year=='2012')  %>% dplyr::select(country, position, total)
+  o_m_5 %>% filter(year == '2012')  %>% dplyr::select(country, position, total)
   
   
   graph_properties <- list(
@@ -67,13 +75,17 @@ o_m_5%>% filter(year=='2012')  %>% dplyr::select(country, position, total)
         zmin = 0,
         zmax = max(o_m_6$Position),
         color = ~ Position,
-        colorscale = "Hot ",
+        colorscale = "Greys",
+        colorbar = list(thickness = 30, len = 1),
         text = ~ Hover,
         hoverinfo = 'text'
       )  %>%
-      layout(geo = graph_properties,
-             title = list(text = "Countries/olympic gamerank 1896 - 2020", size = 300),
-             font = list(family = "DM Sans")) %>%
+      layout(
+        geo = graph_properties,
+        title = list(text = "<b>Countries Olympic total medal position 1896 - 2020</b>", size = 300),
+        font = list(family = "DM Sans", size = 13.5),
+        size = 300
+      ) %>%
       config(displayModeBar = FALSE)
   })
   
@@ -81,11 +93,13 @@ o_m_5%>% filter(year=='2012')  %>% dplyr::select(country, position, total)
   
   output$myranking = renderPlotly({
     medals %>% arrange(desc(Total)) %>% head(30) %>%
-      ggplot(aes(x = Country,
-                 
-                 y = Total,
-                 
-                 fill = Medal)) +
+      ggplot(aes(
+        x = reorder(Country, Count),
+        
+        y = Count,
+        
+        fill = Medal
+      )) +
       
       geom_col() +
       
@@ -100,7 +114,8 @@ o_m_5%>% filter(year=='2012')  %>% dplyr::select(country, position, total)
         plot.subtitle = element_text(size = 14, face = "bold"),
         axis.text.x = element_text(angle = 90, vjust = 0.5),
         panel.grid.major.x = element_blank()
-      )    
+      )    +
+      labs (x = 'Country' , y = 'Medals', title = "Historical medal counts from Competitions")
   })
   
   
@@ -164,27 +179,22 @@ o_m_5%>% filter(year=='2012')  %>% dplyr::select(country, position, total)
   output$How <- renderUI({
     HTML(
       paste(
-        '<h2> <center> Multiple linear regression (MLR)</center> </h2>',
-        '<p> Multiple linear regression (MLR), also known simply as multiple regression, is a statistical technique that uses several explanatory variables to predict the outcome of a response variable. </p>',
-        '<p> The goal of multiple linear regression is to model the linear relationship between the explanatory (independent) variables and response (dependent) variables. In essence, multiple regression is the extension of ordinary least-squares (OLS) regression because it involves more than one explanatory variable.<p/>',
-        
-        '<p> The objective of this application is to allow users to go through the step-by-step process of multiple linear regression in a didactic and intuitive manner. However, it is necessary to have a background in statistics to handle it in the best possible way. It is a suitable application to be used in the classroom with the purpose of learning how to build an OLS model. </p>',
-        
-        '<p>It will enable the user to build a multiple linear regression (MLR) model to predict which variables may influence a country to obtain more or fewer medals during the Olympic Games.</p>',
-        '<p>The provided dataset refers to the 2020 Summer Olympic Games.</p>',
-        '<p>Data was colected from 192 out of the 206 teams that participated in the games </p>',
-        
-        '<b>Tabs </b>',
-        
-        "<p style='color:brown'> <b>Variables</b>: The user will see available independent and dependent variables in the dataset</p>",
-        "<p style='color:brown'><b> Data</b>: Displays all available data, can be filtered for developed or developing countries</p>",
-        "<p style='color:brown'><b>Data Summary</b>: Provides a summary of the variables</p>",
-        "<p style='color:brown'><b>Multicollinearity</b>: According to the selected independent variables, it shows the correlation matrix between them. It\'s important to note that the correlation should not be high; otherwise, the model won\'t be correct.</p>",
-        "<p style='color:brown'><b>Plots</b>: The first graph displays the correlation matrix between all independent variables and the dependent variable. The second graph illustrates this relationship and shows if the same is linear.</p>",
-        "<p style='color:brown'><b>Model</b>: MLR Model according to the chosen region and graphs to check for homoscedastic errors, normally distributed errors, and non-autocorrelated errors.</p>",
-        "<p style='color:brown'><b>Model: Developed x Underdeveloped Countries</b>: A model that compares a regression done only with developed countries and another done only with developing countries.</p>",
-        "<p style='color:brown'><b>Model Selection</b>: Model created using the  Aikake Information Criterion (AIC) is an estimator of prediction error. The AIC awards the lowest score to a model possessing the least loss of information (or that with most predictive power) while minimizing the number of predictor variables.</p>",
-        "<p style='color:brown'><b>Conclusion</b>: Brief discussion of the results found </p>"
+        '<h2><center>Multiple Linear Regression (MLR)</center></h2>',
+        '<p>Multiple Linear Regression (MLR) is a statistical technique that uses multiple explanatory variables to predict the outcome of a response variable.</p>',
+        '<p>The goal of MLR is to model the linear relationship between the independent variables and dependent variables. It extends ordinary least-squares (OLS) regression by involving more than one explanatory variable.</p>',
+        '<p>This application allows users to go through the step-by-step process of MLR in a didactic and intuitive manner. Some background in statistics is recommended for optimal use. It is suitable for classroom learning to build an OLS model.</p>',
+        '<p>The application enables users to build an MLR model to predict variables that may influence the medal count of a country in the Olympic Games.</p>',
+        '<p>The provided dataset is from the 2020 Summer Olympic Games, collected from 192 out of 206 participating teams.</p>',
+        '<b>Tabs:</b>',
+        "<p style='color:brown'><b>Variables:</b> Displays available describtion of independent and dependent variables in the dataset.</p>",
+        "<p style='color:brown'><b>Data:</b> Shows all available data and can be filtered for developed or developing countries.</p>",
+        "<p style='color:brown'><b>Data Summary:</b> Provides a summary of the variables.</p>",
+        "<p style='color:brown'><b>Multicollinearity:</b> Shows the correlation matrix between selected independent variables. High correlation may affect model accuracy.</p>",
+        "<p style='color:brown'><b>Plots:</b> The first graph displays the correlation matrix between independent variables and the dependent variable. The second graph shows the linearity of this relationship.</p>",
+        "<p style='color:brown'><b>Model:</b> Builds an MLR model based on selected region and checks for homoscedastic errors, normally distributed errors, and non-autocorrelated errors.</p>",
+        "<p style='color:brown'><b>Model: Developed x Underdeveloped Countries:</b> Compares regression models for developed and developing countries.</p>",
+        "<p style='color:brown'><b>Model Selection:</b> Creates a model using the Aikake Information Criterion (AIC) to estimate prediction error and select the best model with optimal predictive power and minimal predictor variables.</p>",
+        "<p style='color:brown'><b>Conclusion:</b> Provides a brief discussion of the results found.</p>"
         
       )
     )
@@ -212,7 +222,7 @@ o_m_5%>% filter(year=='2012')  %>% dplyr::select(country, position, total)
           "<ul>",
           "<li style='color:green'>Density (P/Km2): Population density measured in persons per square kilometer.</li>",
           "<li style='color:green'>Agricultural Land (%): Percentage of land area used for agricultural purposes.</li>",
-          "<li style='color:green'>Land Area (Km2): Total land area of the country in square kilometers divided by 10^6.</li>",
+          "<li style='color:green'>Land Area (Km2): Total land area of the country in square kilometers divided by 10<sup>6</sup> .</li>",
           "<li style='color:green'>Armed Forces Size: Size of the armed forces in the country.</li>",
           "<li style='color:green'>Birth Rate: Number of births per 1,000 population per year.</li>",
           "<li style='color:green'>CO2 Emissions: Carbon dioxide emissions in tons.</li>",
@@ -222,7 +232,7 @@ o_m_5%>% filter(year=='2012')  %>% dplyr::select(country, position, total)
           "<li style='color:green'>Fertility Rate: Average number of children born to a woman during her lifetime.</li>",
           "<li style='color:green'>Forested Area (%): Percentage of land area covered by forests.</li>",
           "<li style='color:green'>Gasoline_Price: Price of gasoline per liter in local currency.</li>",
-          "<li style='color:green'>GDP: Gross Domestic Product, the total value of goods and services produced in the country divided by 10^6.</li>",
+          "<li style='color:green'>GDP: Gross Domestic Product, the total value of goods and services produced in the country in USD.</li>",
           "<li style='color:green'>Gross Primary Education Enrollment (%): Gross enrollment ratio for primary education.</li>",
           "<li style='color:green'>Gross Tertiary Education Enrollment (%): Gross enrollment ratio for tertiary education.</li>",
           "<li style='color:green'>Infant Mortality: Number of deaths per 1,000 live births before reaching one year of age.</li>",
@@ -232,20 +242,27 @@ o_m_5%>% filter(year=='2012')  %>% dplyr::select(country, position, total)
           "<li style='color:green'>Minimum Wage: Minimum wage level in local currency.</li>",
           "<li style='color:green'>Out of Pocket Health Expenditure (%): Percentage of total health expenditure paid out-of-pocket by individuals.</li>",
           "<li style='color:green'>Physicians per Thousand: Number of physicians per thousand people.</li>",
-          "<li style='color:green'>Population: Total population of the country divided by 10^6.</li>",
+          "<li style='color:green'>Population: Total population of the country divided by 10<sup>6</sup> .</li>",
           "<li style='color:green'>Population: Labor Force Participation (%): Percentage of the population that is part of the labor force.</li>",
           "<li style='color:green'>Tax Revenue (%): Tax revenue as a percentage of GDP.</li>",
           "<li style='color:green'>Total Tax Rate: Overall tax burden as a percentage of commercial profits.</li>",
           "<li style='color:green'>Unemployment Rate: Percentage of the labor force that is unemployed.</li>",
           "<li style='color:green'>Urban Population: Percentage of the population living in urban areas.</li>",
+          " <li style='color:green'>Individual Athletes: Number of athletes competing individually for a country</li>",
+          "  <li style='color:green'>Team Athletes: Number of teams competing for a country</li>",
+          "  <li style='color:green'>Percentage male individual (%): Percentage of individual athletes who are male</li>",
+          " <li style='color:green'>Percentage male team (%): Percentage of teams that are composed of male athletes</li>",
+          "<li style='color:green'>GDP/capta:  GDP divided by population size </li>",
+          
           "<li style='color:green'>Country Status: If the GDP/capta was lower then $12,000 the country was considered Underdeveloped, else Developed </li>",
+          
           "<li style='color:gray'>All independent variables can also be chosen in their log form</li>",
           "</ul>",
           collapse = "\n"
         )
       )
     })
-  
+  names(df)
   #choose type of data to be displayed
   InputDataset <- reactive({
     region <- input$Region
@@ -265,12 +282,8 @@ o_m_5%>% filter(year=='2012')  %>% dplyr::select(country, position, total)
   
   
   output$Datatext <- renderUI({
-    HTML(
-      paste(
-        "<p> Data table for the selected region </p>"
-        
-      ))   
-  }) 
+    HTML(paste("<p> Data table for the selected region </p>"))
+  })
   
   
   
@@ -286,12 +299,8 @@ o_m_5%>% filter(year=='2012')  %>% dplyr::select(country, position, total)
   
   
   output$Summtext <- renderUI({
-    HTML(
-      paste(
-        "<p> Data summary for the selected region</p>"
-        
-      ))   
-  }) 
+    HTML(paste("<p> Data summary for the selected region</p>"))
+  })
   
   
   #summarizing the data
@@ -301,13 +310,9 @@ o_m_5%>% filter(year=='2012')  %>% dplyr::select(country, position, total)
   
   
   output$Multitext <- renderUI({
-    HTML(
-      paste(
-        "<p> Correlation matrix between the chosen X variables </p>"
-
-      ))   
-  }) 
-        
+    HTML(paste("<p> Correlation matrix between the chosen X variables </p>"))
+  })
+  
   
   #Multicolliniarity - Correlation matrix between x variables
   output$Multi <- renderPlot({
@@ -321,12 +326,11 @@ o_m_5%>% filter(year=='2012')  %>% dplyr::select(country, position, total)
   
   
   output$Corrtext <- renderUI({
-    HTML(
-      paste(
-        "<p> Correlation matrix between chosen x variables and y variable </p>"
-        
-      ))   
-  }) 
+    HTML(paste(
+      "<p> Correlation matrix between chosen x variables and y variable </p>"
+      
+    ))
+  })
   
   
   #Correlation matrix between x variables and y variable
@@ -347,10 +351,11 @@ o_m_5%>% filter(year=='2012')  %>% dplyr::select(country, position, total)
     HTML(
       paste(
         "<p> Scatterplot graphs showing the relashionship of the chosen variables  </p>",
-        "<p> If all regions are selected Red represents Developed countries and Blues represents Undeveloped countries</p>"
+        "<p> If all regions are selected red represents Developed countries and blue represents Undeveloped countries</p>"
         
-      ))   
-  }) 
+      )
+    )
+  })
   
   
   #scatterplot between variables
@@ -390,14 +395,13 @@ o_m_5%>% filter(year=='2012')  %>% dplyr::select(country, position, total)
   
   
   output$Modeltext <- renderUI({
-    HTML(
-      paste(
-        "<p> Multiple linear regression between the chosen region and variables</p>"
-        
-      ))   
-  }) 
+    HTML(paste(
+      "<p> Multiple linear regression between the chosen region and variables</p>"
+      
+    ))
+  })
   
-
+  
   #General Model
   output$Model <-
     renderPrint(
@@ -413,11 +417,8 @@ o_m_5%>% filter(year=='2012')  %>% dplyr::select(country, position, total)
   
   
   output$Plottext <- renderUI({
-    HTML(
-      paste(
-        "<p> Residual plots from the model created</p>"
-      ))   
-  }) 
+    HTML(paste("<p> Residual plots from the model created</p>"))
+  })
   
   
   #General Model residual plots
@@ -435,8 +436,9 @@ o_m_5%>% filter(year=='2012')  %>% dplyr::select(country, position, total)
         "<p> Residual plots from the model created comparing Developed and Undeveloped countries</p>",
         "<p> This only functions if the option All regions is selected </p>"
         
-      ))   
-  }) 
+      )
+    )
+  })
   
   
   
@@ -467,11 +469,12 @@ o_m_5%>% filter(year=='2012')  %>% dplyr::select(country, position, total)
   output$Developedtext <- renderUI({
     HTML(
       paste(
-        "<p> Residual plots from the model created comparing Developed and Undeveloped countries</p>",
-        "<p> This only functions if the option All regions is selected </p>"
+        "<p> Model comparing Developed and Undeveloped countries</p>",
+        "<p> This only functions if the option 'All regions' is selected </p>"
         
-      ))   
-  }) 
+      )
+    )
+  })
   
   
   output$Model2 <-
@@ -490,13 +493,12 @@ o_m_5%>% filter(year=='2012')  %>% dplyr::select(country, position, total)
   
   
   output$Developedplottext <- renderUI({
-    HTML(
-      paste(
-        "<p> Residual plots from the model created comparing Developed and Undeveloped countries</p>",
-        "<p> This only functions if the option All regions is selected </p>"
-        
-      ))   
-  }) 
+    HTML(paste(
+      "<p> Residual plots from the model created for Developed countries</p>",
+      
+      
+    ))
+  })
   
   
   #General Model residual plots for developed
@@ -511,11 +513,12 @@ o_m_5%>% filter(year=='2012')  %>% dplyr::select(country, position, total)
   output$Underdevelopedplottext <- renderUI({
     HTML(
       paste(
-        "<p> Residual plots from the model created comparing Developed and Undeveloped countries</p>",
-        "<p> This only functions if the option All regions is selected </p>"
+        "<p> Residual plots from the model created for Underdeveloped countries</p>",
         
-      ))   
-  }) 
+        
+      )
+    )
+  })
   
   
   
@@ -549,12 +552,8 @@ o_m_5%>% filter(year=='2012')  %>% dplyr::select(country, position, total)
   
   
   output$AICtext <- renderUI({
-    HTML(
-      paste(
-        "<p> Model using AIC</p>"
-        
-      ))   
-  }) 
+    HTML(paste("<p> Model created using AIC</p>"))
+  })
   
   
   
@@ -572,12 +571,8 @@ o_m_5%>% filter(year=='2012')  %>% dplyr::select(country, position, total)
   
   
   output$AICplottext <- renderUI({
-    HTML(
-      paste(
-        "<p> Model using AIC</p>"
-        
-      ))   
-  }) 
+    HTML(paste("<p> Residual plots from the model created using AIC</p>"))
+  })
   
   
   
@@ -629,52 +624,38 @@ o_m_5%>% filter(year=='2012')  %>% dplyr::select(country, position, total)
   output$Conclusion <- renderUI({
     HTML(
       paste0(
-        "<p> A very simple model with a high R^2 would be to use the variables: Land_area_km2, Gdp, Population, and log_Infant_Mortality.
-        However, this model does not satisfy the condition that the mean residual value for every fitted value region is
-        close to 0, as the red line on the residual vs. fitted plot does not remain at zero.</p>",
-        "</br>",
+        '<p>Despite the large number of independent variables, only 4 variables were enough to
+        have a model that meets all the assumptions of a multiple linear regression (multicollinearity, linearity, constant variance,
+        normality, independent errors) and that presents a high R<sup>2</sup> . The equation shown below has the total number
+        of medals won in all countries as the dependent variable, but if the dependent variable were another of the
+        possible available selections, the result would be quite similar.</p>',
         
-        "<p>Therefore, the best model selected to predict the total amount of medals won by
-        all countries was the one created with the AIC estimator. The assumptions for multiple linear
-        regression were considerably satisfied, except for multicollinearity, which was slightly present in
-        the model.</p>",
+        
         
         "<p>",
         "<strong>Best Model:</strong> ",
-        "Total = 11.3310 ",
-        "+ <span style='color:green'>1.8687 * Land_area_km2</span> ",
-        "+ <span style='color:green'>0.00001 * Armed_forces_size</span> ",
-        "+ <span style='color:green'>0.00001 * Co2_emissions</span> ",
-        "- <span style='color:red'>0.0580 * Population</span> ",
-        "+ <span style='color:green'>1.4158 * log_Agricultural_land_percent</span> ",
-        "- <span style='color:red'>14.6936 * log_Birth_rate</span> ",
-        "+ <span style='color:green'>14.0683 * log_Fertility_rate</span> ",
-        "+ <span style='color:green'>5.2804 * log_Gasoline_price</span> ",
-        "+ <span style='color:green'>2.0094 * log_Gdp</span> ",
-        "- <span style='color:red'>1.5553 * log_Out_of_pocket_health_expenditure_percent</span>",
+        "Total = 3.3663 ",
+        "+ <span style='color:green'>0.8814 * Land_area_km2</span> ",
+        "+ <span style='color:green'>0.000002 * Gdp</span> ",
+        "+ <span style='color:green'>0.1733 * Individual_athletes</span> ",
+        "- <span style='color:red'>0.6002 * log_Co2_emissions</span> ",
         "</p>",
         "<p>",
         "Interpretation:",
         "</p>",
-        '<p> 78,65% of the variability of the total number of medals won by all countries in the 2020 summer olympics is explained by the 10 variables listed bellow </p>',
+        '<p> 92,27% of the variability of the total number of medals won by all countries in the 2020 summer olympics is explained by the 4 variables listed bellow: </p>',
         "<ol>",
-        "<li>Land_area_km2: For each million square-kilometer <span style='color:green'>increase</span> in land area, there is an average <span style='color:green'>increase</span> of 1.8687 medals won, keeping everything else constant</li>",
-        "<li>Armed_forces_size: For every one unit <span style='color:green'>increase</span> in the size of the armed forces, there is an average <span style='color:green'>increase</span> of 0.00001 units in medals won, keeping everything else constant</li>",
-        "<li>Co2_emissions: With every one ton <span style='color:green'>increase</span> in carbon dioxide emissions, there is an average <span style='color:green'>increase</span> of 0.00001 medals won, keeping everything else constant</li>",
-        "<li>Population: For each <span style='color:green'>increase</span>  in one million of the population, there is an average <span style='color:red'>decrease</span> of 0.0580 medals won, keeping everything else constant</li>",
+        "<li>Land_area_km2: For each million square-kilometer <span style='color:green'>increase</span> in land area, there is an average <span style='color:green'>increase</span> of 0.8814 medals won, keeping everything else constant</li>",
+        "<li>Gdp: For every dollar <span style='color:green'>increase</span> in the Gdp, there is an average <span style='color:green'>increase</span> of 0.000002 medals won, keeping everything else constant</li>",
+        "<li>Individual_athletes: With every adicional athlete participating in the games for an idividual sport there is an <span style='color:green'>increase</span> of 0.1733 medals won, keeping everything else constant</li>",
+        "<li>log_Co2_emissions: For an 1% <span style='color:green'>increase</span>  in carbon dioxide emissions in tons, there is an average <span style='color:red'>decrease</span> of 0.6002 medals won, keeping everything else constant</li>",
+        "</ol>",
+        '</br>',
+        "<p>The same model, however, if used only for underdeveloped countries, would not satisfy the assumptions of multiple linear regression, but it would work for developed countries.</p>",
         
-        "<li>log_Agricultural_land_percent: An <span style='color:green'>increase</span> of one percent of the percentage of land used for agricultural purposes results in an average <span style='color:green'>increase</span> of 0.014158 medals won, keeping everything else constant</li>",
+        "<p>For underdeveloped countries, a model with only the number of individual athletes already yields an R² of approximately 70%.</p>"
         
-        "<li>log_Birth_rate: A one percent <span style='color:green'>increase</span> of the birth rate is associated with an average <span style='color:red'>decrease</span> of 0.146936 medals won, keeping everything else constant",
         
-        "<li>log_Fertility_rate: A one percent <span style='color:green'>increase</span> of the fertility rate leads to an average <span style='color:green'>increase</span> of 0.140683 medals won, keeping everything else constant </li>",
-        
-        "<li>log_Gasoline_price: With each one percent <span style='color:green'>increase</span> in the natural logarithm of the gasoline price, there is an average <span style='color:green'>increase</span> of 0.052804 medals won, keeping everything else constant</li>",
-        
-        "<li>log_Gdp: A one percent <span style='color:green'>increase</span> of the GDP results results in an average <span style='color:green'>increase</span> of 0.020094 medals won, keeping everything else constant </li>",
-        
-        "<li>log_Out_of_pocket_health_expenditure_percent: An <span style='color:green'>increase</span> of one percent in the of the percentage of out-of-pocket health expenditure is associated with an average <span style='color:red'>decrease</span> of 0.015553 medals won, keeping everything else constant</li>",
-        "</ol>"
       )
     )
   })

@@ -191,10 +191,11 @@ df =  df %>% dplyr::select (
 df = df %>% mutate(
   Land_area_km2 = Land_area_km2 / 1000000,
   Population = Population / 1000000,
-  Gdp = Gdp / 1000000
+  Gdp = Gdp / 1
 )
 
-df = df %>% mutate (Gdp_capta = (Gdp / Population))
+df = df %>% mutate (Gdp_capta = ((Gdp/1000000) / Population))
+
 
 df <-
   df %>% mutate(Country_status = ifelse(Gdp_capta < 12000, "Underdeveloped", "Developed"))

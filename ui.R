@@ -8,7 +8,7 @@ mytheme <- shinytheme ("paper")
 
 
 shinyUI(dashboardPage(
-  skin = 'purple' ,
+  skin = 'blue' ,
   dashboardHeader(title = "Olympics Medals Prediction", dropdownMenuOutput("msgOutput")),
   dashboardSidebar(sidebarMenu(
     id = "tabs",
@@ -69,6 +69,7 @@ shinyUI(dashboardPage(
                   max = max(o_m_5$year),
                   value = c(min(o_m_5$year), max(o_m_5$year)),
                   step = 4,
+                  sep = ""
                 ),
                   withSpinner(plotOutput("slide")), 
                   width = 12, 
