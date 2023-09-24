@@ -6,7 +6,6 @@ library(ggplot2)
 library(GGally)
 library(DT)
 library(shiny)
-library(leaflet)
 library (RColorBrewer)
 library(tidygeocoder)
 library(readxl)
@@ -40,6 +39,9 @@ library(RSQLite)
 library(data.table)
 library(forcats)
 library(rsconnect)
+library(formattable)
+library(viridis)
+
 
 o_m <-
   read_csv("Olympic_Games_Medal_Tally.csv")
@@ -194,11 +196,11 @@ df = df %>% mutate(
   Gdp = Gdp / 1
 )
 
-df = df %>% mutate (Gdp_capta = ((Gdp/1000000) / Population))
+df = df %>% mutate (Gdp_capita = ((Gdp/1000000) / Population))
 
 
 df <-
-  df %>% mutate(Country_status = ifelse(Gdp_capta < 12000, "Underdeveloped", "Developed"))
+  df %>% mutate(Country_status = ifelse(Gdp_capita < 12000, "Underdeveloped", "Developed"))
 
 df[df$Country == "Venezuela", "Country_status"] <- "Underdeveloped"
 df[df$Country == "Palestine", "Country_status"] <- "Underdeveloped"
@@ -281,3 +283,43 @@ hystoric = sports %>% mutate (Summer =  gsub("[[:digit:]]", "", edition),
                               Year = parse_number(edition)) %>%
   filter (Summer == ' Summer Olympics')  %>%  group_by(Year) %>% summarise(Countries =
                                                                              n_distinct(country_noc))
+
+
+
+
+
+
+lm = lm(Total ~ Land_area_km2 + Gdp + Individual_athletes + log_Co2_emissions, data=df)
+
+df2 <- df[complete.cases(df[, c("Land_area_km2", "Gdp", "Individual_athletes", "log_Co2_emissions")]), ]
+
+
+# Dataframe com suas variáveis independentes
+seus_dados = data.frame(x0= df2$Country, x1 = df2$Land_area_km2, x2 = df2$Gdp, x3 = df2$Individual_athletes, x4=df2$log_Co2_emissions )
+seus_dados
+
+# Predições com base no modelo de regressão
+valores_estimados <- predict(lm, data = seus_dados)
+
+# Criar um dataframe com os valores reais e estimados
+tabela_comparativa <- data.frame(Country = df2$Country ,Real = df2$Total, Estimate = valores_estimados)
+
+
+tabela_comparativa = tabela_comparativa %>% mutate('Error' = Real-Estimate)
+tabela_comparativa
+
+
+
+tabela_comparativa= tabela_comparativa %>% 
+  mutate_if(is.numeric, ~round(., 2))  %>% mutate(Position = trunc(rank(-Real)))
+
+
+
+
+tabela_comparativa <- tabela_comparativa[order(tabela_comparativa$Real,decreasing = TRUE), ]
+
+tabela_comparativa <- tabela_comparativa %>%dplyr::select(Position, Country, Real, Estimate, Error)
+
+formattable(tabela_comparativa)
+
+view(df)

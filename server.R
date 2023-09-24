@@ -18,7 +18,6 @@ shinyServer(function(input, output, session) {
   
   #Tab Data------------------------------------------------------------------------------------------------------
   
-  
   output$slide = renderPlot({
     o_m_5 %>%
       filter(position <= 4,
@@ -37,13 +36,14 @@ shinyServer(function(input, output, session) {
       scale_y_reverse(breaks = seq(1, 4, by = 1)) +
       scale_x_continuous(breaks = seq(input$year1[1], input$year1[2], by = 4)) +
       geom_smooth() +
+      scale_color_viridis(discrete = TRUE) +  # Use a paleta de cores viridis
       theme(
         plot.title = element_text(size = 18, face = "bold"),
         plot.subtitle = element_text(size = 14, face = "bold"),
         axis.text.x = element_text(angle = 90, vjust = 0.5),
         panel.grid.major.x = element_blank()
       )  +
-      labs (x = 'Year' , y = 'Position', title = "Top 4 historical total medal position")
+      labs(x = 'Year' , y = 'Position', title = "Top 4 historical total medal position")
   })
   
   
@@ -207,8 +207,8 @@ shinyServer(function(input, output, session) {
         paste(
           "<b>  Country Status </b>",
           "<ul>",
-          "<li style='color:red'> Developed: GDP/capta in the country is higher then $12,000 </li>",
-          "<li style='color:red'> Underdeveloped: GDP/capta in the country is lower then $12,000  </li>",
+          "<li style='color:red'> Developed: GDP/capita in the country is higher than $12,000 </li>",
+          "<li style='color:red'> Underdeveloped: GDP/capita in the country is lower than $12,000  </li>",
           "</ul>",
           "<b>  Dependent variables </b>",
           "<ul>",
@@ -252,9 +252,9 @@ shinyServer(function(input, output, session) {
           "  <li style='color:green'>Team Athletes: Number of teams competing for a country</li>",
           "  <li style='color:green'>Percentage male individual (%): Percentage of individual athletes who are male</li>",
           " <li style='color:green'>Percentage male team (%): Percentage of teams that are composed of male athletes</li>",
-          "<li style='color:green'>GDP/capta:  GDP divided by population size </li>",
+          "<li style='color:green'>GDP/capita:  GDP divided by population size </li>",
           
-          "<li style='color:green'>Country Status: If the GDP/capta was lower then $12,000 the country was considered Underdeveloped, else Developed </li>",
+          "<li style='color:green'>Country Status: If the GDP/capita was lower than $12,000 the country was considered Underdeveloped, else Developed </li>",
           
           "<li style='color:gray'>All independent variables can also be chosen in their log form</li>",
           "</ul>",
@@ -429,6 +429,15 @@ shinyServer(function(input, output, session) {
     par(mfrow = c(1, 1))
     
   })
+  
+  # output$Error <- renderDT({
+  #   datatable(tabela_comparativa(),
+  #             options = list(scrollX = TRUE,
+  #                            columnDefs = list(
+  #                              list(className = "dt-left", targets = "_all")
+  #                            )))
+  # })
+
   
   output$Developedtext <- renderUI({
     HTML(
@@ -647,7 +656,7 @@ shinyServer(function(input, output, session) {
         "<ol>",
         "<li>Land_area_km2: For each million square-kilometer <span style='color:green'>increase</span> in land area, there is an average <span style='color:green'>increase</span> of 0.8814 medals won, keeping everything else constant</li>",
         "<li>Gdp: For every dollar <span style='color:green'>increase</span> in the Gdp, there is an average <span style='color:green'>increase</span> of 0.000002 medals won, keeping everything else constant</li>",
-        "<li>Individual_athletes: With every adicional athlete participating in the games for an idividual sport there is an <span style='color:green'>increase</span> of 0.1733 medals won, keeping everything else constant</li>",
+        "<li>Individual_athletes: With every adicional athlete participating in the games for an individual sport there is an <span style='color:green'>increase</span> of 0.1733 medals won, keeping everything else constant</li>",
         "<li>log_Co2_emissions: For an 1% <span style='color:green'>increase</span>  in carbon dioxide emissions in tons, there is an average <span style='color:red'>decrease</span> of 0.6002 medals won, keeping everything else constant</li>",
         "</ol>",
         '</br>',
@@ -666,3 +675,10 @@ shinyServer(function(input, output, session) {
   
   
 })
+
+
+
+
+
+
+

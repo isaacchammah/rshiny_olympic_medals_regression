@@ -195,6 +195,14 @@ shinyUI(dashboardPage(
                     
                     box(htmlOutput("Plottext"),withSpinner(plotOutput("residualPlots")), width = 12, title = "Diagnostic Plots")
                     
+                    
+                    # box("Error",
+                    #   box(htmlOutput("Errortext"),
+                    #       withSpinner(DTOutput(
+                    #         "Error"
+                    #       ), ), width = 12, ))
+                    
+                    
                   ),
                   
                   tabPanel(
@@ -226,18 +234,7 @@ shinyUI(dashboardPage(
                   ),
                   
                   
-                  # tabPanel(
-                  #   "Best Model",
-                  #   box(
-                  #     withSpinner(verbatimTextOutput("Model4")),
-                  #     width = 12,
-                  #     title = "Model Summary"
-                  #   ),
-                    
-                  #   box(withSpinner(plotOutput("residualPlots5")), width = 12, title = "Diagnostic Plots")
-                  #   
-                  # ),
-                  
+              
                   
                   
                   tabPanel("Conclusion",

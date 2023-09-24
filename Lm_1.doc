@@ -1,27 +1,27 @@
 
 All
 ==========================================================
-                                      NA                  
+                                    Total                 
 ----------------------------------------------------------
-Land_area_km2                     0.0008***               
-                                   (0.0002)               
+Land_area_km2                     0.8814***               
+                                   (0.1989)               
                                                           
 Gdp                               0.0000***               
                                    (0.0000)               
                                                           
-Individual_athletes               0.0002***               
-                                  (0.00001)               
+Individual_athletes               0.1733***               
+                                   (0.0088)               
                                                           
-log_Co2_emissions                 -0.0006***              
-                                   (0.0002)               
+log_Co2_emissions                 -0.6002***              
+                                   (0.1628)               
                                                           
-Constant                           0.0031**               
-                                   (0.0013)               
+Constant                           3.3663**               
+                                   (1.4189)               
                                                           
 N                                    185                  
 R2                                  0.9227                
 Adjusted R2                         0.9210                
-Residual Std. Error           0.0038 (df = 180)           
+Residual Std. Error           4.1318 (df = 180)           
 F Statistic               537.2325*** (df = 4; 180)       
 ==========================================================
 Notes:              ***Significant at the 1 percent level.
