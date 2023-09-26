@@ -287,39 +287,39 @@ hystoric = sports %>% mutate (Summer =  gsub("[[:digit:]]", "", edition),
 
 
 
+# 
+# 
+# lm = lm(Total ~ Land_area_km2 + Gdp + Individual_athletes + log_Co2_emissions, data=df)
+# 
+# df2 <- df[complete.cases(df[, c("Land_area_km2", "Gdp", "Individual_athletes", "log_Co2_emissions")]), ]
+# 
+# 
+# # Dataframe com suas variáveis independentes
+# seus_dados = data.frame(x0= df2$Country, x1 = df2$Land_area_km2, x2 = df2$Gdp, x3 = df2$Individual_athletes, x4=df2$log_Co2_emissions )
+# seus_dados
+# 
+# # Predições com base no modelo de regressão
+# valores_estimados <- predict(lm, data = seus_dados)
+# 
+# # Criar um dataframe com os valores reais e estimados
+# tabela_comparativa <- data.frame(Country = df2$Country ,Real = df2$Total, Estimate = valores_estimados)
+# 
+# 
+# tabela_comparativa = tabela_comparativa %>% mutate('Error' = Real-Estimate)
+# tabela_comparativa
+# 
+# 
+# 
+# tabela_comparativa= tabela_comparativa %>% 
+#   mutate_if(is.numeric, ~round(., 2))  %>% mutate(Position = trunc(rank(-Real)))
 
 
-lm = lm(Total ~ Land_area_km2 + Gdp + Individual_athletes + log_Co2_emissions, data=df)
-
-df2 <- df[complete.cases(df[, c("Land_area_km2", "Gdp", "Individual_athletes", "log_Co2_emissions")]), ]
 
 
-# Dataframe com suas variáveis independentes
-seus_dados = data.frame(x0= df2$Country, x1 = df2$Land_area_km2, x2 = df2$Gdp, x3 = df2$Individual_athletes, x4=df2$log_Co2_emissions )
-seus_dados
-
-# Predições com base no modelo de regressão
-valores_estimados <- predict(lm, data = seus_dados)
-
-# Criar um dataframe com os valores reais e estimados
-tabela_comparativa <- data.frame(Country = df2$Country ,Real = df2$Total, Estimate = valores_estimados)
-
-
-tabela_comparativa = tabela_comparativa %>% mutate('Error' = Real-Estimate)
-tabela_comparativa
-
-
-
-tabela_comparativa= tabela_comparativa %>% 
-  mutate_if(is.numeric, ~round(., 2))  %>% mutate(Position = trunc(rank(-Real)))
-
-
-
-
-tabela_comparativa <- tabela_comparativa[order(tabela_comparativa$Real,decreasing = TRUE), ]
-
-tabela_comparativa <- tabela_comparativa %>%dplyr::select(Position, Country, Real, Estimate, Error)
-
-formattable(tabela_comparativa)
-
-view(df)
+# tabela_comparativa <- tabela_comparativa[order(tabela_comparativa$Real,decreasing = TRUE), ]
+# 
+# tabela_comparativa <- tabela_comparativa %>%dplyr::select(Position, Country, Real, Estimate, Error)
+# 
+# formattable(tabela_comparativa)
+# 
+# view(df)

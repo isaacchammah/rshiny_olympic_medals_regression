@@ -5,11 +5,11 @@ shinyServer(function(input, output, session) {
     HTML(
       paste(
         "<center><h2><span style='color:brown'>The Significance of Olympic Medals</span></h2></center>",
-        "<h5>Whether we like it or not, winning medals, especially gold medals, at the Olympic Games holds immense importance for every country, including the United States. It represents national pride, symbolizes strength, and commands respect from others.</h5>",
+        "<h5>Whether we like it or not, winning medals, especially gold medals, at the Olympic Games holds immense importance for every country, including the United States. A medal is a source of national pride that reflects strength and commands respect from others.</h5>",
         "<p>This app consists of two sections:</p>",
         "<ol>",
         "<li>Data: Four graphs display information on the modern Olympic Summer Games.</li>",
-        "<li>Regression: Users can create their own linear regression model to understand which variables influenced a country's medal count in the 2020 Summer Olympics.</li>",
+        "<li>Regression: Users can create their own linear regression model to understand which variables influence a country's medal count in the 2020 Summer Olympics.</li>",
         "</ol>"
       )
     )
@@ -182,7 +182,7 @@ shinyServer(function(input, output, session) {
         '<h2><center>Multiple Linear Regression (MLR)</center></h2>',
         '<p>Multiple Linear Regression (MLR) is a statistical technique that uses multiple explanatory variables to predict the outcome of a response variable.</p>',
         '<p>The goal of MLR is to model the linear relationship between the independent variables and dependent variables. It extends ordinary least-squares (OLS) regression by involving more than one explanatory variable.</p>',
-        '<p>This application allows users to go through the step-by-step process of MLR in a didactic and intuitive manner. Some background in statistics is recommended for optimal use. It is suitable for classroom learning to build an OLS model.</p>',
+        '<p>This application allows users to go through the step-by-step process of MLR in a didactic and intuitive manner. Some background in statistics is recommended for optimal use. It is suitable for classroom exercises for students learning to build an OLS model.</p>',
         '<p>The application enables users to build an MLR model to predict variables that may influence the medal count of a country in the Olympic Games.</p>',
         '<p>The provided dataset is from the 2020 Summer Olympic Games, collected from 192 out of 206 participating teams.</p>',
         '<b>Tabs:</b>',
@@ -193,7 +193,7 @@ shinyServer(function(input, output, session) {
         "<p style='color:brown'><b>Plots:</b> The first graph displays the correlation matrix between independent variables and the dependent variable. The second graph shows the linearity of this relationship.</p>",
         "<p style='color:brown'><b>Model:</b> Builds an MLR model based on selected region and checks for homoscedastic errors, normally distributed errors, and non-autocorrelated errors.</p>",
         "<p style='color:brown'><b>Model: Developed x Underdeveloped Countries:</b> Compares regression models for developed and developing countries.</p>",
-        "<p style='color:brown'><b>Model Selection:</b> Creates a model using the Aikake Information Criterion (AIC) to estimate prediction error and select the best model with optimal predictive power and minimal predictor variables.</p>",
+        "<p style='color:brown'><b>Model Selection:</b> Creates a model using the Akaike  Information Criterion (AIC) to estimate prediction error and select the best model with optimal predictive power and minimal predictor variables.</p>",
         "<p style='color:brown'><b>Conclusion:</b> Provides a brief discussion of the results found.</p>"
         
       )
@@ -594,19 +594,19 @@ shinyServer(function(input, output, session) {
   })
   
   
-  best_model = (
-    lm(
-      Total ~ Density_p_km2 + Land_area_km2 + Armed_forces_size + Co2_emissions +
-        Gasoline_price + Infant_mortality + Life_expectancy + Maternal_mortality_ratio +
-        Population + Population_labor_force_participation_percent +
-        Unemployment_rate + Urban_population + Gdp_capta + log_Density_p_km2 +
-        log_Agricultural_land_percent + log_Birth_rate + log_Fertility_rate +
-        log_Gasoline_price + log_Gdp + log_Infant_mortality + log_Maternal_mortality_ratio +
-        log_Out_of_pocket_health_expenditure_percent + log_Physicians_per_thousand +
-        log_Population + log_Urban_population + log_Gdp_capta,
-      data = df
-    )
-  )
+  # best_model = (
+  #   lm(
+  #     Total ~ Density_p_km2 + Land_area_km2 + Armed_forces_size + Co2_emissions +
+  #       Gasoline_price + Infant_mortality + Life_expectancy + Maternal_mortality_ratio +
+  #       Population + Population_labor_force_participation_percent +
+  #       Unemployment_rate + Urban_population + Gdp_capta + log_Density_p_km2 +
+  #       log_Agricultural_land_percent + log_Birth_rate + log_Fertility_rate +
+  #       log_Gasoline_price + log_Gdp + log_Infant_mortality + log_Maternal_mortality_ratio +
+  #       log_Out_of_pocket_health_expenditure_percent + log_Physicians_per_thousand +
+  #       log_Population + log_Urban_population + log_Gdp_capta,
+  #     data = df
+  #   )
+  # )
   
   
   output$Model4 <-
@@ -652,18 +652,17 @@ shinyServer(function(input, output, session) {
         "<p>",
         "Interpretation:",
         "</p>",
-        '<p> 92,27% of the variability of the total number of medals won by all countries in the 2020 summer olympics is explained by the 4 variables listed bellow: </p>',
+        '<p> 92.27% of the variability of the total number of medals won by all countries in the 2020 summer olympics is explained by the 4 variables listed bellow: </p>',
         "<ol>",
         "<li>Land_area_km2: For each million square-kilometer <span style='color:green'>increase</span> in land area, there is an average <span style='color:green'>increase</span> of 0.8814 medals won, keeping everything else constant</li>",
         "<li>Gdp: For every dollar <span style='color:green'>increase</span> in the Gdp, there is an average <span style='color:green'>increase</span> of 0.000002 medals won, keeping everything else constant</li>",
-        "<li>Individual_athletes: With every adicional athlete participating in the games for an individual sport there is an <span style='color:green'>increase</span> of 0.1733 medals won, keeping everything else constant</li>",
+        "<li>Individual_athletes: With every additional athlete participating in the games for an individual sport there is an <span style='color:green'>increase</span> of 0.1733 medals won, keeping everything else constant</li>",
         "<li>log_Co2_emissions: For an 1% <span style='color:green'>increase</span>  in carbon dioxide emissions in tons, there is an average <span style='color:red'>decrease</span> of 0.6002 medals won, keeping everything else constant</li>",
         "</ol>",
         '</br>',
-        "<p>The same model, however, if used only for underdeveloped countries, would not satisfy the assumptions of multiple linear regression, but it would work for developed countries.</p>",
+        "<p>However, if the same model were used only for underdeveloped countries, it would not satisfy the assumptions of multiple linear regression, though it would work for developed countries.For underdeveloped countries, a model with only the number of individual athletes already yields an R² of approximately 70%.</p>",
         
-        "<p>For underdeveloped countries, a model with only the number of individual athletes already yields an R² of approximately 70%.</p>"
-        
+
         
       )
     )
