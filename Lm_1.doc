@@ -1,16 +1,21 @@
 
-All
-==========================================================
-                                    Total                 
-----------------------------------------------------------
-Constant                          5.4764***               
-                                   (1.0487)               
-                                                          
-N                                    191                  
-R2                                  0.0000                
-Adjusted R2                         0.0000                
-Residual Std. Error           14.4931 (df = 190)          
-==========================================================
-Notes:              ***Significant at the 1 percent level.
-                     **Significant at the 5 percent level.
-                     *Significant at the 10 percent level.
+Developed Underdeveloped
+================================================================
+                                         NA                     
+                            (1)                   (2)           
+----------------------------------------------------------------
+Birth_rate                -1.2081              -0.2484***       
+                         (0.9091)               (0.0675)        
+                                                                
+Constant                 25.7537**             8.5163***        
+                         (10.5586)              (1.7737)        
+                                                                
+N                           61                    125           
+R2                        0.0291                 0.0992         
+Adjusted R2               0.0126                 0.0919         
+Residual Std. Error  21.9858 (df = 59)     6.8601 (df = 123)    
+F Statistic         1.7662 (df = 1; 59) 13.5422*** (df = 1; 123)
+================================================================
+Notes:                    ***Significant at the 1 percent level.
+                           **Significant at the 5 percent level.
+                           *Significant at the 10 percent level.

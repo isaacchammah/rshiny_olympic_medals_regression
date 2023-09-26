@@ -136,6 +136,8 @@ o_m_6 = inner_join(o_m_5, codes, by = 'country')
 
 o_m_6 = o_m_6  %>% mutate(hover = paste0(country, "\n", position))
 
+names(o_m_6) <- str_to_title(names(o_m_6))
+
 df = inner_join(df, athletes, by = 'Country')
 
 df = df %>% mutate_at(
@@ -229,6 +231,9 @@ xnames3 =  df %>%  dplyr::select(
   -Individual_athletes_male,
   -Team_athletes_male
 )
+
+
+
 
 
 

@@ -106,6 +106,7 @@ shinyServer(function(input, output, session) {
     ) %>%
     filter(Medal != 'Total')
   
+  
   output$myranking = renderPlotly({
     medals %>% arrange(desc(Total)) %>% head(30) %>%
       ggplot(aes(
@@ -450,13 +451,7 @@ shinyServer(function(input, output, session) {
     
   })
   
-  # output$Error <- renderDT({
-  #   datatable(tabela_comparativa(),
-  #             options = list(scrollX = TRUE,
-  #                            columnDefs = list(
-  #                              list(className = "dt-left", targets = "_all")
-  #                            )))
-  # })
+
   
   
   output$Developedtext <- renderUI({
@@ -614,19 +609,7 @@ shinyServer(function(input, output, session) {
   })
   
   
-  # best_model = (
-  #   lm(
-  #     Total ~ Density_p_km2 + Land_area_km2 + Armed_forces_size + Co2_emissions +
-  #       Gasoline_price + Infant_mortality + Life_expectancy + Maternal_mortality_ratio +
-  #       Population + Population_labor_force_participation_percent +
-  #       Unemployment_rate + Urban_population + Gdp_capta + log_Density_p_km2 +
-  #       log_Agricultural_land_percent + log_Birth_rate + log_Fertility_rate +
-  #       log_Gasoline_price + log_Gdp + log_Infant_mortality + log_Maternal_mortality_ratio +
-  #       log_Out_of_pocket_health_expenditure_percent + log_Physicians_per_thousand +
-  #       log_Population + log_Urban_population + log_Gdp_capta,
-  #     data = df
-  #   )
-  # )
+
   
   
   output$Model4 <-
