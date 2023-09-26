@@ -1,19 +1,15 @@
 
 All
 ==========================================================
-                                      NA                  
+                                    Total                 
 ----------------------------------------------------------
-Density_p_km2                      -0.0003                
-                                   (0.0005)               
-                                                          
-Constant                          5.5743***               
-                                   (1.0668)               
+Constant                          5.4764***               
+                                   (1.0487)               
                                                           
 N                                    191                  
-R2                                  0.0015                
-Adjusted R2                        -0.0038                
-Residual Std. Error           14.5206 (df = 189)          
-F Statistic                  0.2805 (df = 1; 189)         
+R2                                  0.0000                
+Adjusted R2                         0.0000                
+Residual Std. Error           14.4931 (df = 190)          
 ==========================================================
 Notes:              ***Significant at the 1 percent level.
                      **Significant at the 5 percent level.

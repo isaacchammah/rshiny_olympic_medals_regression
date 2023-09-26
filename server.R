@@ -89,7 +89,22 @@ shinyServer(function(input, output, session) {
       config(displayModeBar = FALSE)
   })
   
-  medals
+  
+  medals = o_m_6 %>%
+    dplyr::select(Country, Gold, Silver, Bronze, Total) %>%
+    group_by(Country) %>%
+    summarise(
+      Gold = sum(Gold),
+      Silver = sum(Silver),
+      Bronze = sum(Bronze),
+      Total = sum(Total)
+    )  %>%
+    pivot_longer(
+      cols = c(Gold, Silver, Bronze),
+      names_to = "Medal",
+      values_to = "Count"
+    ) %>%
+    filter(Medal != 'Total')
   
   output$myranking = renderPlotly({
     medals %>% arrange(desc(Total)) %>% head(30) %>%
@@ -119,6 +134,11 @@ shinyServer(function(input, output, session) {
   })
   
   
+  
+  hystoric = sports %>% mutate (Summer =  gsub("[[:digit:]]", "", edition),
+                                Year = parse_number(edition)) %>%
+    filter (Summer == ' Summer Olympics')  %>%  group_by(Year) %>% summarise(Countries =
+                                                                               n_distinct(country_noc))
   
   
   
@@ -437,7 +457,7 @@ shinyServer(function(input, output, session) {
   #                              list(className = "dt-left", targets = "_all")
   #                            )))
   # })
-
+  
   
   output$Developedtext <- renderUI({
     HTML(
@@ -662,7 +682,7 @@ shinyServer(function(input, output, session) {
         '</br>',
         "<p>However, if the same model were used only for underdeveloped countries, it would not satisfy the assumptions of multiple linear regression, though it would work for developed countries.For underdeveloped countries, a model with only the number of individual athletes already yields an R² of approximately 70%.</p>",
         
-
+        
         
       )
     )
@@ -674,10 +694,3 @@ shinyServer(function(input, output, session) {
   
   
 })
-
-
-
-
-
-
-
